@@ -53,12 +53,15 @@ class Graph:
             self.adjacencyLists.update({node:{} })
             self.adjacencyMatrix = self.addNodeToAdjacencyMatrix(self.adjacencyMatrix, node)
     
-    def addEdge(self, source, destArray): #doesn't matter if it's directed or not, does matter if it's weighted
+    def addEdges(self, source, destArray): #doesn't matter if it's directed or not, does matter if it's weighted
         destination = destArray[0]
         if(self.isWeighted):
             weights = destArray[1:]
+        self.addNode(source) #if the node is already in adjacencyLists then this will do nothing. We have this line for when this function is used later on
+
         #do adjacencyList first
-        
+        #first check if destination is in source's set
+        if destination in self.adjacencyLists.get(source): #if the destination is already in 
 
 
 
