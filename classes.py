@@ -13,13 +13,13 @@ class Graph:
     isDirected = False
     isWeighted = False
     ## data structures
-    adjacencyLists = {} # a dictionary - each key's value is a set of node names
+    adjacencyLists = {} # a dictionary - each key's value is a set of lists - first element in each list is the destination node name, second element is a numpy array of weights
     adjacencyMatrix = pd.DataFrame()
 
     # Methods -----------------------------------------
     def __init__(self, file): #this will read files directly
         f = open(file)
-        self.name = f.readline()[len("GaphName: "):].split("\n")[0]
+        self.name = f.readline()[len("GraphName: "):].split("\n")[0]
         self.date = f.readline()[len("Date: "):].split("\n")[0]
         self.description = f.readline()[len("Description: "):].split("\n")[0]
         self.isMultiGraph = True if f.readline()[len("MultiGraph: "):] == "T\n" else False
@@ -39,8 +39,8 @@ class Graph:
             sourceNode = row[0][0]
             self.addNode(sourceNode) #adds sourceNode to adjacencyList and adjacencyMatrix
             destinationNodes = row[1]
-            for elem in destinationNodes: #removes the empty string so we are left with just node names and weights
-                elem = elem[1:]  
+            for dest in destinationNodes: #removes the empty string so we are left with just node names and weights
+                dest = dest[1:]  
                 #destinationNodes = [['B', '1', '2'], ['D', '2']]
 
     def addNodeToAdjacencyMatrix(self, df, node):
@@ -53,7 +53,14 @@ class Graph:
             self.adjacencyLists.update({node:{} })
             self.adjacencyMatrix = self.addNodeToAdjacencyMatrix(self.adjacencyMatrix, node)
     
-    def addEdges(self,)
+    def addEdge(self, source, destArray): #doesn't matter if it's directed or not, does matter if it's weighted
+        destination = destArray[0]
+        if(self.isWeighted):
+            weights = destArray[1:]
+        #do adjacencyList first
+        
+
+
 
 
 class GraphCollection:

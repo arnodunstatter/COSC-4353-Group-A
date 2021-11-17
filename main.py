@@ -1,6 +1,6 @@
 from classes import Graph
 
-g = Graph("t1.txt")
+g = Graph("toyInput.txt")
 print(g.name)
 print(g.date)
 print(g.description)
