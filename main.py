@@ -9,3 +9,5 @@ print(g.isDirected)
 print(g.isWeighted)
 print(g.adjacencyLists)
 print(g.adjacencyMatrix)
+
+print("hello")

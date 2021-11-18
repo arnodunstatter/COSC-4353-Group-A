@@ -26,6 +26,8 @@ class Graph:
         self.isDirected = True if f.readline()[len("Directed: "):] == "T\n" else False
         self.isWeighted = True if f.readline()[len("Weighted: "):] == "T\n" else False
         #handle adjacencyList
+        sDict = {}
+        sourceNode1 = ""
         for eachRow in f: #example of eachRow "A -> B 1 2, D 2\n"
             if("\n"==eachRow[len(eachRow)-1:]): #if the line ends in "\n", then remove it - example result: "A -> B 1 2, D 2"
                 row = eachRow[:len(eachRow)-1]
@@ -40,8 +42,19 @@ class Graph:
             self.addNode(sourceNode) #adds sourceNode to adjacencyList and adjacencyMatrix
             destinationNodes = row[1]
             for dest in destinationNodes: #removes the empty string so we are left with just node names and weights
-                dest = dest[1:]  
+                dest = dest[1:]
+                destination = dest[0]
+                if (self.isWeighted):
+                    weights = dest[1:]
+                if (sourceNode1 == sourceNode):
+                    sDict[""] = [destination, weights]
+                else:
+                    sDict[sourceNode] = [destination, weights]
+                sourceNode1 = sourceNode
+                print(dest)
                 #destinationNodes = [['B', '1', '2'], ['D', '2']]
+        print(sDict)
+
 
     def addNodeToAdjacencyMatrix(self, df, node):
         df.insert(loc=len(df.columns), column=node, value= NaN)
