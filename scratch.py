@@ -2,7 +2,9 @@ import pandas as pd
 import numpy as np
 from IPython.display import display
 
-a = np.NaN
-if(np.isnan(a)): print("yup")
-else:print("nope")
+dict = {"a":{1,2,3}}
+a_set = dict["a"]
+print(a_set.get(1))
+
+
 

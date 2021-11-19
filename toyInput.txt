@@ -7,4 +7,4 @@ Weighted: T
 A -> B 1 2, D 2
 B -> C 3
 C -> C 2
-D -> 
+D ->
