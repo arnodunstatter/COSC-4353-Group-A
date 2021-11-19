@@ -41,30 +41,31 @@ class Graph:
             sourceNode = row[0][0]
             self.addNode(sourceNode) #adds sourceNode to adjacencyList and adjacencyMatrix
             destinationNodes = row[1]
-            for dest in destinationNodes: #removes the empty string so we are left with just node names and weights
-                dest = dest[1:]
-                destination = dest[0]
-                if (self.isWeighted):
-                    weights = dest[1:]
-                if (sourceNode1 == sourceNode):
-                    sDict[""] = [destination, weights]
-                else:
-                    sDict[sourceNode] = [destination, weights]
-                sourceNode1 = sourceNode
-                print(dest)
-                #destinationNodes = [['B', '1', '2'], ['D', '2']]
-        print(sDict)
+            for i in range(len(destinationNodes)): # ['', 'B', '1', '2'] -> ['B', '1', '2']
+                destinationNodes[i] = destinationNodes[i][1:]
 
+            for destination in destinationNodes:
+                self.addEdges(sourceNode, destination)
 
-    def addNodeToAdjacencyMatrix(self, df, node):
-        df.insert(loc=len(df.columns), column=node, value= NaN)
-        newRow = pd.Series(name=node, dtype='object')
-        return df.append(newRow)
+    # def addSourceToAdjacencyMatrix(self, df, source):
+    #     df.insert(loc=len(df.columns), column=source, value=np.NaN)
+    #     return df
+    def addSourceToAdjacencyMatrix(self, source):
+        self.adjacencyMatrix.insert(loc=len(self.adjacencyMatrix.columns), column=source, value=np.NaN)
+
+    # def addDestinationToAdjacencyMatrix(self, df, destination):
+    #     newRow = pd.Series(name=destination, dtype='object')
+    #     return df.append(newRow)
+    def addDestinationToAdjacencyMatrix(self, destination):
+        self.adjacencyMatrix.loc[destination] = pd.Series(name=destination, dtype='object')
 
     def addNode(self, node):
-        if(None == self.adjacencyLists.get(node)):
-            self.adjacencyLists.update({node:{} })
-            self.adjacencyMatrix = self.addNodeToAdjacencyMatrix(self.adjacencyMatrix, node)
+        if self.adjacencyLists.get(node) is None:
+            self.adjacencyLists.update({node: {}})
+
+            self.addSourceToAdjacencyMatrix(node)
+            if not self.isDirected:
+                self.addDestinationToAdjacencyMatrix(node)
     
     def addEdges(self, source, destArray): #doesn't matter if it's directed or not, does matter if it's weighted
         destination = destArray[0]
