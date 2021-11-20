@@ -1,13 +1,7 @@
 from classes import Graph
+import numpy as np
 
 g = Graph("toyInput.txt")
-print(g.name)
-print(g.date)
-print(g.description)
-print(g.isMultiGraph)
-print(g.isDirected)
-print(g.isWeighted)
-print(g.adjacencyLists)
-print(g.adjacencyMatrix)
 
-print("hello")
+# print(type(np.array([1])))
+# print(type(g.adjacencyMatrix.loc["A","D"]))
