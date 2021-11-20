@@ -1,4 +1,4 @@
-GraphName: BasicGraph1
+GraphName: DirectedWeightedMultigraph1
 Date: 11/17/21
 Description: This is just for testing.
 MultiGraph: T
