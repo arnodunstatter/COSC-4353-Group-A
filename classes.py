@@ -21,11 +21,17 @@ class Graph:
                                     # df.loc[] (and df.at[]) will have the syntax df.loc[source,destination] instead of df.loc[destination,source]
 
     # Methods -----------------------------------------
+    def __init__(self, **kwargs):
+        if len(kwargs) == 1:
+            self.makeFromTxt(**kwargs)
+        else:
+            self.generateGraph(**kwargs)
+
     '''Define graph generator method: that takes in parameters that give guidelines to the type of graph to be made (a number of nodes, a number of connections or a connections multiplier, 
     a value to use as the rng's seed, a bool for whether its directed/undirected, a bool for whether its a mulitgraph, a bool for whether connections are weighted, range of connection weights) 
     and then the method uses an rng, in conjunction with the given parameters, to decide which nodes are connected, and (if applicable) the weights of the connections.
     '''
-    def __init__(self, seed, numNodes, numConnections, name="", date="", description="", weightsRange=None, isMultiGraph=False, isDirected=False, isWeighted=False): # random graph generator
+    def generateGraph(self, seed, numNodes, numConnections, name="", date="", description="", weightsRange=None, isMultiGraph=False, isDirected=False, isWeighted=False): # random graph generator
         # set attributes
         self.name = name
         self.date = date.today()
@@ -39,7 +45,7 @@ class Graph:
             self.addNode(str(i), "destination")
         # For each numConnections, use rng to determine the source and destination (bound by numNodes) and weight (bound by weightsRange) then add that edge to adjLis and adjMat
         npr.seed(seed=seed) # for repeatability
-        for edge in range(len(numConnections)):
+        for edge in range(numConnections):
             source = str(npr.randint(0,numNodes))
             destination = str(npr.randint(0,numNodes))
             self.helper_makeRandEdge(numNodes, source, destination, weightsRange)
@@ -47,16 +53,22 @@ class Graph:
     def helper_makeRandEdge(self, numNodes, source, destination, weightsRange):
         if not self.isMultigraph: # if it's not a multigraph then destination cannot be the same as source AND source, destination pair must not be in adjacencyLists already
             while(source == destination): #if source is the same as destination, get a new destination
-                destination = str(npr.randomint(0,numNodes))
-            if destination in self.adjacencyLists.get(source): # if it's a non multigraph and we already have an edge between source and destination, we need a new source and destination
+                destination = str(npr.randint(0,numNodes))
+            # we need all destinations that source goes to, but self.adjacencyLists.get() returns the set of tuples with the first value of each being each destination's name
+            if destination in set([x[0] for x in self.adjacencyLists.get(source)]): # if it's a non multigraph and we already have an edge between source and destination, we need a new source and destination
                 source = str(npr.randint(0,numNodes))
                 destination = str(npr.randint(0,numNodes))
                 self.helper_makeRandEdge(numNodes, source, destination, weightsRange)
-        weight = npr.randint(weightsRange[0],weightsRange[1]+1)
+        if self.isWeighted:
+            weight = npr.randint(weightsRange[0],weightsRange[1]+1)
+        else:
+            weight = 1
+
+        #print(f"adding an edge between {source} and {destination} with weight {weight}")
         self.addEdges(source, [destination,weight])
 
 
-    def __init__(self, file): # this will read files directly
+    def makeFromTxt(self, file): # this will read files directly
         f = open(file)
         self.name = f.readline()[len("GraphName: "):].split("\n")[0]
         self.date = f.readline()[len("Date: "):].split("\n")[0]
@@ -133,7 +145,10 @@ class Graph:
 
     def addEdges(self, source, destList): # doesn't matter if it's directed or not, does matter if it's weighted
         destination = destList[0]
-
+        if not self.isDirected and not self.isMultiGraph: #if it's undirected and is not a multigraph and we already have source->destination then return (don't want to double-add that edge)
+            # the first condition is to prevent an exception when checking the second condition (NoneType is not iterable)
+            if None != self.adjacencyLists.get(destination) and source in set([x[0] for x in self.adjacencyLists.get(destination)]):
+                return
         if self.isMultiGraph or self.isWeighted:
             weights = destList[1:]
         else: #unweighted and not a multiGraph
@@ -161,21 +176,42 @@ class Graph:
             self.adjacencyLists[source].remove(found)
             self.adjacencyLists[source].add(updated)
 
+        #if it's undirected we need to do the above but for the reverse, i.e. destination->source
+        revDestList = destList #reverse destination list (i.e. the `source` is used as the destination
+        revDestList[0] = source
+        found = ()
+        if not self.isDirected and source != destination:
+            for eachDest in self.adjacencyLists[destination]: #for each destination in `destination`'s destinations
+                if source == eachDest[0]: # try to find `source` (as a destination)
+                    found = eachDest
+                    break #once we find it we can break this loop
+            if 0 == len(found): # we never found `source` as a destination of `destination`'s so `source` is not yet a destination of `destination`
+                updatedDestinations = set(self.adjacencyLists[destination]) #need to keep the other destinations
+                updatedDestinations.add(tuple(revDestList))
+                self.adjacencyLists.update({destination: updatedDestinations})
+            else: # found the destination
+                updated = list(found)
+                for i in revDestList[1:]: #update the weights of the destination
+                    updated.append(i)
+                updated = tuple(updated)
+                self.adjacencyLists[destination].remove(found)
+                self.adjacencyLists[destination].add(updated)
+
+
+        if source =='1' and destination=='0':
+            mark='gay'
         # whether directed or not we add the weights to adjacencyMatrix
         # but are we initializing it or just appending to already existent weights?
-        if np.isnan(self.adjacencyMatrix.at[source,destination]): # we are initializing it
+        #if np.isnan(self.adjacencyMatrix.at[source,destination]): # we are initializing it
+        if isinstance(self.adjacencyMatrix.at[source,destination], type(np.NaN)): #then it's nan so we are initializing it
             self.adjacencyMatrix.at[source,destination] = weights
-
-        #if np.isnan(self.adjacencyMatrix[destination][source]):
-            #self.adjacencyMatrix[destination][source] = np.array(weights)
         else: # we are adding a new weights to already existing weights
-            #self.adjacencyMatrix[source][destination] = np.append(self.adjacencyMatrix[source][destination], weights)
-            self.adjacencyMatrix.at[source,destination] = np.append(self.adjacencyMatrix.loc[source,destination], weights)
+            self.adjacencyMatrix.at[source,destination] = np.append(self.adjacencyMatrix.at[source,destination], weights)
 
-        # if not self.isDirected: # undirected -> add weights to both places
-        #     if np.isnan(self.adjacencyMatrix.at[destination,source]):  # we are initializing all weights
-        #         #self.adjacencyMatrix[destination][source] = np.array(weights)
-        #         self.adjacencyMatrix.at[destination,source] = weights
-        #     else:  # we are adding a new weights to already existing weights
-        #         #self.adjacencyMatrix[destination][source] = np.append(self.adjacencyMatrix[source][destination], weights)
-        #         self.adjacencyMatrix.at[destination,source] = np.append(self.adjacencyMatrix[source][destination], weights)
+        if not self.isDirected and source != destination: # undirected -> add weights to both places
+            #if np.isnan(self.adjacencyMatrix.at[destination,source]):  # we are initializing all weights
+            if isinstance(self.adjacencyMatrix.at[destination,source], type(np.NaN)):  # then it's nan so we are initializing it
+                self.adjacencyMatrix.at[destination,source] = weights
+            else:  # we are adding a new weights to already existing weights
+                #self.adjacencyMatrix[destination][source] = np.append(self.adjacencyMatrix[source][destination], weights)
+                self.adjacencyMatrix.at[destination,source] = np.append(self.adjacencyMatrix.at[destination,source], weights)
