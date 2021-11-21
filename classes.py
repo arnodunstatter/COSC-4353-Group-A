@@ -1,7 +1,9 @@
 from numpy.core.numeric import NaN
 import pandas as pd
 import numpy as np
-from sys import exit
+from sys import exit # used to end program if an invalid keyword is given to addNode
+import numpy.random as npr # used for creating random graphs (one of the __init__ functions for Graph class)
+from datetime import date # used for giving default date to graph generator as today's date
 
 class Graph:
     # default Attributes ------------------------------------
@@ -16,9 +18,44 @@ class Graph:
     ## data structures
     adjacencyLists = {} # a dictionary - each key's value is a set of tuples where the first value in the tuple is the destination node's name and every value after that is a weight
     adjacencyMatrix = pd.DataFrame() # for directed graphs rows are sources, columns are destinations - this change was made so that accessing elements with
-                                    # df.loc[] will have the syntax df.loc[source,destination] instead of df.loc[destination,source]
+                                    # df.loc[] (and df.at[]) will have the syntax df.loc[source,destination] instead of df.loc[destination,source]
 
     # Methods -----------------------------------------
+    '''Define graph generator method: that takes in parameters that give guidelines to the type of graph to be made (a number of nodes, a number of connections or a connections multiplier, 
+    a value to use as the rng's seed, a bool for whether its directed/undirected, a bool for whether its a mulitgraph, a bool for whether connections are weighted, range of connection weights) 
+    and then the method uses an rng, in conjunction with the given parameters, to decide which nodes are connected, and (if applicable) the weights of the connections.
+    '''
+    def __init__(self, seed, numNodes, numConnections, name="", date="", description="", weightsRange=None, isMultiGraph=False, isDirected=False, isWeighted=False): # random graph generator
+        # set attributes
+        self.name = name
+        self.date = date.today()
+        self.description = description
+        self.isMultiGraph = isMultiGraph
+        self.isDirected = isDirected
+        self.isWeighted = isWeighted
+        # For each numNodes initialize adjacencyMatrix and adjacencyLists
+        for i in range(numNodes):
+            self.addNode(str(i), "source")
+            self.addNode(str(i), "destination")
+        # For each numConnections, use rng to determine the source and destination (bound by numNodes) and weight (bound by weightsRange) then add that edge to adjLis and adjMat
+        npr.seed(seed=seed) # for repeatability
+        for edge in range(len(numConnections)):
+            source = str(npr.randint(0,numNodes))
+            destination = str(npr.randint(0,numNodes))
+            self.helper_makeRandEdge(numNodes, source, destination, weightsRange)
+
+    def helper_makeRandEdge(self, numNodes, source, destination, weightsRange):
+        if not self.isMultigraph: # if it's not a multigraph then destination cannot be the same as source AND source, destination pair must not be in adjacencyLists already
+            while(source == destination): #if source is the same as destination, get a new destination
+                destination = str(npr.randomint(0,numNodes))
+            if destination in self.adjacencyLists.get(source): # if it's a non multigraph and we already have an edge between source and destination, we need a new source and destination
+                source = str(npr.randint(0,numNodes))
+                destination = str(npr.randint(0,numNodes))
+                self.helper_makeRandEdge(numNodes, source, destination, weightsRange)
+        weight = npr.randint(weightsRange[0],weightsRange[1]+1)
+        self.addEdges(source, [destination,weight])
+
+
     def __init__(self, file): # this will read files directly
         f = open(file)
         self.name = f.readline()[len("GraphName: "):].split("\n")[0]
@@ -28,6 +65,7 @@ class Graph:
         self.isDirected = True if f.readline()[len("Directed: "):] == "T\n" else False
         self.isWeighted = True if f.readline()[len("Weighted: "):] == "T\n" else False
         #the remaining lines in f should be the adjacency lists
+        rows = []
         for eachRow in f: # example of eachRow "A -> B 1 2, D 2\n"
             if("\n"==eachRow[len(eachRow)-1:]): # if the line ends in "\n", then remove it - example result: "A -> B 1 2, D 2"
                 row = eachRow[:len(eachRow)-1]
@@ -47,20 +85,15 @@ class Graph:
                 for j in range(len(destinationNodes[i])):
                     if j > 0: #only changes weights
                         destinationNodes[i][j] = float(destinationNodes[i][j])
-            self.addNode(sourceNode, "source") # adds sourceNode to adjacencyList and adjacencyMatrix
-
+            self.addNode(sourceNode, "source")
+            self.addNode(sourceNode, "destination")
             if len(destinationNodes[0]) == 0: #for "Source ->" rows in .txt
                 continue
-
             for destination in destinationNodes:
                 self.addEdges(sourceNode, destination)
-                print("adding row:\t", eachRow[:len(eachRow)-1])
-                print("adjacencyMatrix:\n", self.adjacencyMatrix,"\n")
-                print("adjacencyLists:\n",self.adjacencyLists, "\n")
-                print(f"type at source {sourceNode}, destination {destination[0]} is {type(self.adjacencyMatrix.loc[sourceNode,destination[0]])}\n\n\n")
 
     def addSourceToAdjacencyMatrix(self, source):
-        self.adjacencyMatrix.loc[source] = pd.Series(name=source, dtype='object')
+        self.adjacencyMatrix.loc[source] = pd.Series(name=source, dtype=object)
 
     def addDestinationToAdjacencyMatrix(self, destination):
         self.adjacencyMatrix.insert(loc=len(self.adjacencyMatrix.columns), column=destination, value=np.NaN)
@@ -68,9 +101,10 @@ class Graph:
 
     def addNode(self, node, nodePurpose = None):
         #first we add it to the adjacencyLists as a source
-        if self.adjacencyLists.get(node) is None: # if the adjacency List doesn't have the node present
+        if self.adjacencyLists.get(node) == None: # if the adjacency List doesn't have the node present
             self.adjacencyLists.update({node: {}}) # then add it
 
+        #now we add to the adjacencyMatrix
         if self.isDirected:
             if nodePurpose == "source": # if the node is a source, then...
                 if node not in set(self.adjacencyMatrix.index): # if the node is not already a row, then...
@@ -127,31 +161,21 @@ class Graph:
             self.adjacencyLists[source].remove(found)
             self.adjacencyLists[source].add(updated)
 
-        # do adjacencyMatrix now
-        # first check if destination is in adjacencyMatrix as an index (i.e. a row)
-        if destination not in set(self.adjacencyMatrix.columns): # if the destination is not already a column in the adjMat then we need to add it
-            self.addDestinationToAdjacencyMatrix(destination)
-
         # whether directed or not we add the weights to adjacencyMatrix
         # but are we initializing it or just appending to already existent weights?
-        if np.isnan(self.adjacencyMatrix.loc[source,destination]): # we are initializing it
-            type1 = type(weights)
-            self.adjacencyMatrix.loc[source,destination] = weights
-            type2 = type(self.adjacencyMatrix.loc[source,destination])
+        if np.isnan(self.adjacencyMatrix.at[source,destination]): # we are initializing it
+            self.adjacencyMatrix.at[source,destination] = weights
+
         #if np.isnan(self.adjacencyMatrix[destination][source]):
             #self.adjacencyMatrix[destination][source] = np.array(weights)
         else: # we are adding a new weights to already existing weights
             #self.adjacencyMatrix[source][destination] = np.append(self.adjacencyMatrix[source][destination], weights)
-            self.adjacencyMatrix.loc[source,destination] = np.append(self.adjacencyMatrix.loc[source,destination], weights)
+            self.adjacencyMatrix.at[source,destination] = np.append(self.adjacencyMatrix.loc[source,destination], weights)
 
-        if not self.isDirected: # undirected -> add weights to both places
-            if np.isnan(self.adjacencyMatrix.loc[source, destination]):  # we are initializing all weights
-                #self.adjacencyMatrix[destination][source] = np.array(weights)
-                self.adjacencyMatrix.loc[destination,source] = weights
-            else:  # we are adding a new weights to already existing weights
-                #self.adjacencyMatrix[destination][source] = np.append(self.adjacencyMatrix[source][destination], weights)
-                self.adjacencyMatrix.loc[destination,source] = np.append(self.adjacencyMatrix[source][destination], weights)
-
-# class GraphCollection:
-#     def __init__(self, file):
-#         f = open(file)
+        # if not self.isDirected: # undirected -> add weights to both places
+        #     if np.isnan(self.adjacencyMatrix.at[destination,source]):  # we are initializing all weights
+        #         #self.adjacencyMatrix[destination][source] = np.array(weights)
+        #         self.adjacencyMatrix.at[destination,source] = weights
+        #     else:  # we are adding a new weights to already existing weights
+        #         #self.adjacencyMatrix[destination][source] = np.append(self.adjacencyMatrix[source][destination], weights)
+        #         self.adjacencyMatrix.at[destination,source] = np.append(self.adjacencyMatrix[source][destination], weights)
