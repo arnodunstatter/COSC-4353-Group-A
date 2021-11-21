@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="635011fa-1c17-4946-be7c-3f4089e12094" name="Default Changelist" comment="1. Got generateGraph mostly done&#10;TODO: &#10;Arno: Work on figuring out the &quot;RecursionError: maximum recursion depth exceeded while calling a Python object&quot; issue for&#10;`g = Graph(`g = Graph(seed=1, numNodes=5, numConnections=5, name=&quot;&quot;, date=&quot;&quot;, description=&quot;&quot;, weightsRange=[1,10], isMultiGraph=False, isDirected=True, isWeighted=True)`&#10;Work on deleting nodes, deleting edges, creating a collectionOfGraphs object, reading a collectionOfGraphs .txt&#10;Mark &amp; Santos: Writing from Graph object to txt, formatted like &quot;toyInput.txt&quot;">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_19_2021_6_10_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_19_2021_6_10_PM__Default_Changelist_.xml" afterDir="false" />
+    <list default="true" id="635011fa-1c17-4946-be7c-3f4089e12094" name="Default Changelist" comment="Edited travis.yml to build upon pushes and showing the build status on README.md">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/toyInput.txt" beforeDir="false" afterPath="$PROJECT_DIR$/toyInput.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/travis.yml" afterDir="false" />
     </list>
     <list id="ca8a3e87-dca8-400a-ab82-13e56ddb0828" name="Changes by mle4" comment="Changes by mle4" />
@@ -128,7 +126,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637472613752</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Edited travis.yml to build upon pushes and showing the build status on README.md">
+      <created>1637528713451</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1637528713451</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -150,7 +155,8 @@
     <MESSAGE value="unversioned files preventing me form pulling" />
     <MESSAGE value="1. Got generateGraph mostly done&#10;TODO: &#10;Arno: Work on figuring out the &quot;RecursionError: maximum recursion depth exceeded while calling a Python object&quot; issue for&#10;`g = Graph(`g = Graph(seed=1, numNodes=5, numConnections=5, name=&quot;&quot;, date=&quot;&quot;, description=&quot;&quot;, weightsRange=[1,10], isMultiGraph=False, isDirected=True, isWeighted=True)`&#10;Work on deleting nodes, deleting edges, creating a collectionOfGraphs object, reading a collectionOfGraphs .txt&#10;Mark &amp; Santos: Writing from Graph object to txt, formatted like &quot;toyInput.txt&quot;" />
     <MESSAGE value="Changes by mle4" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes by mle4" />
+    <MESSAGE value="Edited travis.yml to build upon pushes and showing the build status on README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edited travis.yml to build upon pushes and showing the build status on README.md" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
