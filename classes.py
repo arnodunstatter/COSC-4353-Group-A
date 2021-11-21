@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from sys import exit # used to end program if an invalid keyword is given to addNode
 import numpy.random as npr # used for creating random graphs (one of the __init__ functions for Graph class)
-from datetime import date # used for giving default date to graph generator as today's date
+import datetime # used for giving default date to graph generator as today's date
 
 class Graph:
     # default Attributes ------------------------------------
@@ -34,7 +34,7 @@ class Graph:
     def generateGraph(self, seed, numNodes, numConnections, name="", date="", description="", weightsRange=None, isMultiGraph=False, isDirected=False, isWeighted=False): # random graph generator
         # set attributes
         self.name = name
-        self.date = date.today()
+        self.date = datetime.date.today()
         self.description = description
         self.isMultiGraph = isMultiGraph
         self.isDirected = isDirected
@@ -51,7 +51,7 @@ class Graph:
             self.helper_makeRandEdge(numNodes, source, destination, weightsRange)
 
     def helper_makeRandEdge(self, numNodes, source, destination, weightsRange):
-        if not self.isMultigraph: # if it's not a multigraph then destination cannot be the same as source AND source, destination pair must not be in adjacencyLists already
+        if not self.isMultiGraph: # if it's not a multigraph then destination cannot be the same as source AND source, destination pair must not be in adjacencyLists already
             while(source == destination): #if source is the same as destination, get a new destination
                 destination = str(npr.randint(0,numNodes))
             # we need all destinations that source goes to, but self.adjacencyLists.get() returns the set of tuples with the first value of each being each destination's name
@@ -153,7 +153,7 @@ class Graph:
             weights = destList[1:]
         else: #unweighted and not a multiGraph
             weights = [1]
-        weights = np.array(weights)
+        weights = np.asarray(weights)
         self.addNode(source, "source") # if the node is already in adjacencyLists then this will do nothing. We have this line for when this function is used later on
         self.addNode(destination, "destination")
 
