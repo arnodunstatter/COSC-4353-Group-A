@@ -4,7 +4,7 @@ Description: This is just for testing.
 MultiGraph: T
 Directed: T
 Weighted: T
-A -> B 1 2, D 2
+A -> B 1 2, D 2 3
 B -> C 3
 C -> C 2
 D ->
