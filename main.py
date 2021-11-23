@@ -33,13 +33,23 @@ D -> A
 
 #generateGraph(self, seed, numNodes, numConnections, name="", date="", description="", weightsRange=None, isMultiGraph=False, isDirected=False, isWeighted=False)
 
-for isDirected in [True, False]:
-    for isWeighted in [True, False]:
-        for isMultiGraph in [True, False]:
-            print(f"Settings: isMultiGraph={isMultiGraph}, isDirected={isWeighted}, isWeighted={isWeighted}")
-            g = Graph(seed=1, numNodes=5, numConnections=5, name="", date="", description="", weightsRange=[1,10], isMultiGraph=isMultiGraph, isDirected=isWeighted, isWeighted=isWeighted)
-            print(g.adjacencyLists)
-            print(g.adjacencyMatrix)
+#possibleCases = [True, False]
+
+#for isMultiGraph in possibleCases:
+#    for isWeighted in possibleCases:
+#        for isDirected in possibleCases:
+
+# current issue: Do not call for all 9 possible combinations. Will run into recursion issue.
+# Works with at least 4 cases at a time. For now do not use the nested for-loop.
+isMultiGraph = False
+isDirected = False
+isWeighted = True
+
+print(f"Settings: isMultiGraph={isMultiGraph}, isDirected={isDirected}, isWeighted={isWeighted}")
+g = Graph(seed=2, numNodes=5, numConnections=7, name="", date="", description="", weightsRange=[1,5], isMultiGraph=isMultiGraph, isDirected=isWeighted, isWeighted=isWeighted)
+print("\n\nFinal:")
+print(g.adjacencyLists)
+print(g.adjacencyMatrix)
 
             expected = "symmetric" if not g.isDirected else "asymmetric"
             if g.adjacencyMatrix.equals(g.adjacencyMatrix.transpose()):

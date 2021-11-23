@@ -58,7 +58,7 @@ class Graph:
             if destination in set([x[0] for x in self.adjacencyLists.get(source)]): # if it's a non multigraph and we already have an edge between source and destination, we need a new source and destination
                 source = str(npr.randint(0,numNodes))
                 destination = str(npr.randint(0,numNodes))
-                self.helper_makeRandEdge(numNodes, source, destination, weightsRange)
+                self.helperMakeRandEdge(numNodes, source, destination, weightsRange)
         if self.isWeighted:
             weight = npr.randint(weightsRange[0],weightsRange[1]+1)
         else:
@@ -197,9 +197,8 @@ class Graph:
                 self.adjacencyLists[destination].remove(found)
                 self.adjacencyLists[destination].add(updated)
 
-
-        if source =='1' and destination=='0':
-            mark='gay'
+        if source == '1' and destination == '0':
+            mark = 'hey'
         # whether directed or not we add the weights to adjacencyMatrix
         # but are we initializing it or just appending to already existent weights?
         #if np.isnan(self.adjacencyMatrix.at[source,destination]): # we are initializing it
