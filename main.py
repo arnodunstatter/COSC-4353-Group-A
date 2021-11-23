@@ -51,10 +51,10 @@ print("\n\nFinal:")
 print(g.adjacencyLists)
 print(g.adjacencyMatrix)
 
-            expected = "symmetric" if not g.isDirected else "asymmetric"
-            if g.adjacencyMatrix.equals(g.adjacencyMatrix.transpose()):
-                actual = "symmetric"
-            else:
-                actual = "asymmetric"
-            print(f"Expected: {expected}\nActual: {actual}")
-            print("\n")
+expected = "symmetric" if not g.isDirected else "asymmetric"
+if g.adjacencyMatrix.equals(g.adjacencyMatrix.transpose()):
+    actual = "symmetric"
+else:
+    actual = "asymmetric"
+print(f"Expected: {expected}\nActual: {actual}")
+print("\n")
