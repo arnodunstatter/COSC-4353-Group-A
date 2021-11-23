@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="635011fa-1c17-4946-be7c-3f4089e12094" name="Default Changelist" comment="Removed for-loop case checker to allow build to be complete and identified a couple bugs with certain case combinations">
-      <change beforePath="$PROJECT_DIR$/.idea/COSC-4353-Group-A.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/COSC-4353-Group-A.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_19_2021_6_10_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_19_2021_6_10_PM__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch.py" beforeDir="false" afterPath="$PROJECT_DIR$/scratch.py" afterDir="false" />
-    </list>
+    <list default="true" id="635011fa-1c17-4946-be7c-3f4089e12094" name="Default Changelist" comment="" />
     <list id="2278c8ec-a927-4362-bb05-8a30913f8d83" name="Changes by Mia" comment="Recommitting for correct updates from previous commit" />
     <list id="ca8a3e87-dca8-400a-ab82-13e56ddb0828" name="Changes by mle4" comment="Changes by mle4" />
     <option name="SHOW_DIALOG" value="false" />
@@ -115,7 +107,7 @@
       <updated>1637279783159</updated>
       <workItem from="1637455607595" duration="16760000" />
       <workItem from="1637631911648" duration="12913000" />
-      <workItem from="1637697684866" duration="9140000" />
+      <workItem from="1637697684866" duration="9558000" />
     </task>
     <task id="LOCAL-00001" summary="unversioned files preventing me form pulling">
       <created>1637367141115</created>
@@ -159,7 +151,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637644992105</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="1. Fixed __init__ so that it explicitly sets default values&#10;Question for Alipour: Why does the __init__ constructor in python not set default values by default? Each new call to our __init__ (when we had it embedded in a for-loop) still had data from previous objects created in earlier iterations of the for-loops.&#10;&#10;2. wrote writeToTxt function to output to .txt files">
+      <created>1637710373672</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1637710373672</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -184,14 +183,15 @@
     <MESSAGE value="Edited travis.yml to build upon pushes and showing the build status on README.md" />
     <MESSAGE value="Removed for-loop case checker to allow build to be complete and identified a couple bugs with certain case combinations" />
     <MESSAGE value="Recommitting for correct updates from previous commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Recommitting for correct updates from previous commit" />
+    <MESSAGE value="1. Fixed __init__ so that it explicitly sets default values&#10;Question for Alipour: Why does the __init__ constructor in python not set default values by default? Each new call to our __init__ (when we had it embedded in a for-loop) still had data from previous objects created in earlier iterations of the for-loops.&#10;&#10;2. wrote writeToTxt function to output to .txt files" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. Fixed __init__ so that it explicitly sets default values&#10;Question for Alipour: Why does the __init__ constructor in python not set default values by default? Each new call to our __init__ (when we had it embedded in a for-loop) still had data from previous objects created in earlier iterations of the for-loops.&#10;&#10;2. wrote writeToTxt function to output to .txt files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>62</line>
+          <line>56</line>
           <option name="timeStamp" value="37" />
         </line-breakpoint>
       </breakpoints>
@@ -206,7 +206,7 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/COSC_4353_Group_A$main.coverage" NAME="main Coverage Results" MODIFIED="1637709897795" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/COSC_4353_Group_A$main.coverage" NAME="main Coverage Results" MODIFIED="1637710125611" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/COSC_4353_Group_A$scartch.coverage" NAME="scartch Coverage Results" MODIFIED="1637709759046" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
