@@ -4,17 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="635011fa-1c17-4946-be7c-3f4089e12094" name="Default Changelist" comment="Edited travis.yml to build upon pushes and showing the build status on README.md">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_19_2021_6_10_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_19_2021_6_10_PM__Default_Changelist_.xml" afterDir="false" />
+    <list default="true" id="635011fa-1c17-4946-be7c-3f4089e12094" name="Default Changelist" comment="Removed for-loop case checker to allow build to be complete and identified a couple bugs with certain case combinations">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
-    <list id="d2b25b6a-b0b2-446b-becb-e48037607449" name="Changes by arnod" comment="" />
-    <list id="2278c8ec-a927-4362-bb05-8a30913f8d83" name="Changes by Mia" comment="">
-      <change beforePath="$PROJECT_DIR$/classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-    </list>
+    <list id="2278c8ec-a927-4362-bb05-8a30913f8d83" name="Changes by Mia" comment="Recommitting for correct updates from previous commit" />
     <list id="ca8a3e87-dca8-400a-ab82-13e56ddb0828" name="Changes by mle4" comment="Changes by mle4" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,64 +24,6 @@
       </set>
     </option>
   </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/main.py">
-      <ranges>
-        <range start1="35" end1="42" start2="35" end2="52" changelist="635011fa-1c17-4946-be7c-3f4089e12094" />
-        <range start1="43" end1="50" start2="53" end2="61" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/classes.py">
-      <ranges>
-        <range start1="3" end1="6" start2="3" end2="6" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="7" end1="7" start2="7" end2="8" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="18" end1="21" start2="19" end2="23" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="33" end1="34" start2="35" end2="38" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="46" end1="47" start2="50" end2="51" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="48" end1="51" start2="52" end2="55" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="52" end1="56" start2="56" end2="61" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="57" end1="58" start2="62" end2="64" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="60" end1="61" start2="66" end2="67" changelist="635011fa-1c17-4946-be7c-3f4089e12094" />
-        <range start1="62" end1="63" start2="68" end2="69" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="66" end1="69" start2="72" end2="74" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="70" end1="71" start2="75" end2="76" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="78" end1="79" start2="83" end2="84" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="80" end1="88" start2="85" end2="97" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="92" end1="93" start2="101" end2="102" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="95" end1="96" start2="104" end2="105" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="97" end1="98" start2="106" end2="107" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="101" end1="102" start2="110" end2="111" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="113" end1="117" start2="122" end2="126" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="118" end1="119" start2="127" end2="128" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="120" end1="122" start2="129" end2="131" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="123" end1="125" start2="132" end2="134" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="127" end1="128" start2="136" end2="137" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="129" end1="131" start2="138" end2="141" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="132" end1="134" start2="142" end2="144" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="135" end1="136" start2="145" end2="146" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="139" end1="140" start2="149" end2="150" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="142" end1="144" start2="152" end2="155" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="145" end1="146" start2="156" end2="157" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="147" end1="148" start2="158" end2="159" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="149" end1="150" start2="160" end2="162" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="153" end1="154" start2="165" end2="166" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="156" end1="157" start2="168" end2="169" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="162" end1="168" start2="174" end2="180" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="170" end1="171" start2="182" end2="183" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="172" end1="173" start2="184" end2="185" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="178" end1="180" start2="190" end2="192" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="183" end1="185" start2="195" end2="197" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="186" end1="189" start2="198" end2="202" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="191" end1="192" start2="204" end2="205" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="193" end1="194" start2="206" end2="207" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="199" end1="202" start2="212" end2="214" changelist="635011fa-1c17-4946-be7c-3f4089e12094" />
-        <range start1="204" end1="209" start2="216" end2="223" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="210" end1="214" start2="224" end2="229" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="215" end1="217" start2="230" end2="233" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-        <range start1="218" end1="218" start2="234" end2="235" changelist="2278c8ec-a927-4362-bb05-8a30913f8d83" />
-      </ranges>
-    </file>
-  </component>
   <component name="ProjectId" id="2176TCu4vnqCBbHb2R0FAmP0xq6" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -97,7 +32,6 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="codeWithMe.voiceChat.enabledByDefault" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/main.py" />
@@ -143,7 +77,7 @@
       <option name="presentableId" value="Default" />
       <updated>1637279783159</updated>
       <workItem from="1637455607595" duration="16760000" />
-      <workItem from="1637631911648" duration="11743000" />
+      <workItem from="1637631911648" duration="12913000" />
     </task>
     <task id="LOCAL-00001" summary="unversioned files preventing me form pulling">
       <created>1637367141115</created>
@@ -173,7 +107,21 @@
       <option name="project" value="LOCAL" />
       <updated>1637528713451</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Removed for-loop case checker to allow build to be complete and identified a couple bugs with certain case combinations">
+      <created>1637644054776</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1637644054776</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Recommitting for correct updates from previous commit">
+      <created>1637644992105</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1637644992105</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,7 +144,9 @@
     <MESSAGE value="1. Got generateGraph mostly done&#10;TODO: &#10;Arno: Work on figuring out the &quot;RecursionError: maximum recursion depth exceeded while calling a Python object&quot; issue for&#10;`g = Graph(`g = Graph(seed=1, numNodes=5, numConnections=5, name=&quot;&quot;, date=&quot;&quot;, description=&quot;&quot;, weightsRange=[1,10], isMultiGraph=False, isDirected=True, isWeighted=True)`&#10;Work on deleting nodes, deleting edges, creating a collectionOfGraphs object, reading a collectionOfGraphs .txt&#10;Mark &amp; Santos: Writing from Graph object to txt, formatted like &quot;toyInput.txt&quot;" />
     <MESSAGE value="Changes by mle4" />
     <MESSAGE value="Edited travis.yml to build upon pushes and showing the build status on README.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="Edited travis.yml to build upon pushes and showing the build status on README.md" />
+    <MESSAGE value="Removed for-loop case checker to allow build to be complete and identified a couple bugs with certain case combinations" />
+    <MESSAGE value="Recommitting for correct updates from previous commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Recommitting for correct updates from previous commit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -293,6 +243,6 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/COSC_4353_Group_A$classes.coverage" NAME="main Coverage Results" MODIFIED="1637437169660" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/COSC_4353_Group_A$main_without_conda.coverage" NAME="main Coverage Results" MODIFIED="1637470757485" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/COSC_4353_Group_A$main.coverage" NAME="main Coverage Results" MODIFIED="1637643628132" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/COSC_4353_Group_A$main.coverage" NAME="main Coverage Results" MODIFIED="1637644233549" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
