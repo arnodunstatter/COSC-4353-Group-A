@@ -4,5 +4,3 @@ from IPython.display import display
 from numpy.random import randint
 
 
-import sys
-print(sys.getrecursionlimit())

@@ -22,17 +22,22 @@ class Graph:
 
     # df.loc[] (and df.at[]) will have the syntax df.loc[source,destination] instead of df.loc[destination,source]
 
-    # Methods -----------------------------------------
+    # Methods
     def __init__(self, **kwargs):
+        # The __init__ constructor wasn't setting the default values by default, so we added the next 8 lines to force the default values at the beginning of each constructor call
+        self.name = ""
+        self.date = ""
+        self.description = ""
+        self.isMultiGraph = False
+        self.isDirected = False
+        self.isWeighted = False
+        self.adjacencyLists = {}
+        self.adjacencyMatrix = pd.DataFrame()
+
         if len(kwargs) == 1:
             self.makeFromTxt(**kwargs)
         else:
             self.generateGraph(**kwargs)
-
-    '''Define graph generator method: that takes in parameters that give guidelines to the type of graph to be made (a number of nodes, a number of connections or a connections multiplier, 
-    a value to use as the rng's seed, a bool for whether its directed/undirected, a bool for whether its a mulitgraph, a bool for whether connections are weighted, range of connection weights) 
-    and then the method uses an rng, in conjunction with the given parameters, to decide which nodes are connected, and (if applicable) the weights of the connections.
-    '''
 
     def generateGraph(self, seed, numNodes, numConnections, name="", date="", description="", weightsRange=None,
                       isMultiGraph=False, isDirected=False, isWeighted=False):  # random graph generator
@@ -54,7 +59,6 @@ class Graph:
             destination = str(npr.randint(0, numNodes))
             self.helperMakeRandEdge(numNodes, source, destination, weightsRange)
 
-
     def helperMakeRandEdge(self, numNodes, source, destination, weightsRange):
         if not self.isMultiGraph:  # if it's not a multigraph then destination cannot be the same as source AND source, destination pair must not be in adjacencyLists already
             while source == destination:  # if source is the same as destination, get a new destination
@@ -71,7 +75,7 @@ class Graph:
             weight = 1
 
         self.addEdges(source, [destination, weight])
-        print(f"adding an edge between {source} and {destination} with weight {weight}","\n",self.adjacencyLists,"\n",self.adjacencyMatrix,"\n")
+        #print(f"adding an edge between {source} and {destination} with weight {weight}","\n",self.adjacencyLists,"\n",self.adjacencyMatrix,"\n")
 
     def makeFromTxt(self, file):  # this will read files directly
         f = open(file)
@@ -105,7 +109,10 @@ class Graph:
             for i in range(len(destinationNodes)):  # this converts the weights from being strings to floats
                 for j in range(len(destinationNodes[i])):
                     if j > 0:  # only changes weights
-                        destinationNodes[i][j] = float(destinationNodes[i][j])
+                        if float(destinationNodes[i][j]) == int(destinationNodes[i][j]):
+                            destinationNodes[i][j] = int(destinationNodes[i][j])
+                        else:
+                            destinationNodes[i][j] = float(destinationNodes[i][j])
             self.addNode(sourceNode, "source")
             self.addNode(sourceNode, "destination")
             if len(destinationNodes[0]) == 0:  # for "Source ->" rows in .txt
@@ -232,4 +239,57 @@ class Graph:
                 self.adjacencyMatrix.at[destination, source] = np.append(self.adjacencyMatrix.at[destination, source],
                                                                          weights)
 
-    #def writeTxt(self):
+    def evaluateSymmetry(self):
+        expected = "symmetric" if not self.isDirected else "asymmetric"
+        if self.adjacencyMatrix.size > 0 and self.adjacencyMatrix.equals(self.adjacencyMatrix.transpose()):
+            actual = "symmetric"
+        else:
+            actual = "asymmetric"
+        print(f"Expected: {expected}\nActual: {actual}")
+        print("\n")
+
+
+    def formattedAdjacencyList(self):
+        '''
+        formats the following:
+        {"a":{("b", 1, 2),("c", 1)},
+        "b":{("a", 1, 2)},
+        "c":{("a", 1)}}
+        to a string like this:
+        "a -> b 1 2, c 1
+        b -> a 1 2
+        c -> a 1"
+        and returns it
+        '''
+        formAdjLists = ""
+        counter1 = 0
+        for key in self.adjacencyLists:
+            formAdjLists += key + " ->"
+            destinations = self.adjacencyLists.get(key)
+            counter2 = 0 #used to determine if we are at the last element in the set - we don't want to add a comma if we are at the last destination for that key(source)
+            for dest in destinations:
+                for val in dest:
+                    formAdjLists += " " + str(val)
+
+                if counter2 != len(destinations)-1:
+                    formAdjLists += ","
+
+                counter2 += 1
+            if counter1 != len(self.adjacencyLists)-1:
+                formAdjLists += "\n"
+            counter1 += 1
+        return formAdjLists
+
+    def writeToTxt(self, fileName):
+        thisFile = open(fileName, "w")
+        thisFile.write("GraphName: " + self.name + "\n")
+        thisFile.write("Date: " + str(self.date) + "\n")
+        thisFile.write("Description: " + self.description + "\n")
+        isMultiGraph = "T" if self.isMultiGraph else "F"
+        thisFile.write("MultiGraph: " + isMultiGraph + "\n")
+        isDirected = "T" if self.isDirected else "F"
+        thisFile.write("Directed: "+isDirected + "\n")
+        isWeighted = "T" if self.isDirected else "F"
+        thisFile.write("Weighted: " + isWeighted + "\n")
+        thisFile.write(self.formattedAdjacencyList())
+        thisFile.close()

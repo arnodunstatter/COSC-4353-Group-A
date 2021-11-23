@@ -33,28 +33,27 @@ D -> A
 
 #generateGraph(self, seed, numNodes, numConnections, name="", date="", description="", weightsRange=None, isMultiGraph=False, isDirected=False, isWeighted=False)
 
-#possibleCases = [True, False]
+possibleCases = [True, False]
+counter = 1
+for isMultiGraph in possibleCases:
+    for isWeighted in possibleCases:
+        for isDirected in possibleCases:
+            print(f"\n\nSettings: isMultiGraph={isMultiGraph}, isDirected={isDirected}, isWeighted={isWeighted}")
+            g =  Graph(seed=2, numNodes=5, numConnections=7, name="", date="", description="", weightsRange=[1,5], isMultiGraph=isMultiGraph, isDirected=isDirected, isWeighted=isWeighted)
+            print("Final:")
+            print(g.formattedAdjacencyList())
+            print(g.adjacencyMatrix)
+            print(f"finished graph {counter}")
+            g.evaluateSymmetry()
+            g.writeToTxt(f"./testingWriteToTxtFunction/Graph{counter}")
+            counter += 1
 
-#for isMultiGraph in possibleCases:
-#    for isWeighted in possibleCases:
-#        for isDirected in possibleCases:
-
-# current issue: Do not call for all 9 possible combinations. Will run into recursion issue.
-# Works with at least 4 cases at a time. For now do not use the nested for-loop.
-isMultiGraph = False
-isDirected = False
-isWeighted = True
-
-print(f"Settings: isMultiGraph={isMultiGraph}, isDirected={isDirected}, isWeighted={isWeighted}")
-g = Graph(seed=2, numNodes=5, numConnections=7, name="", date="", description="", weightsRange=[1,5], isMultiGraph=isMultiGraph, isDirected=isWeighted, isWeighted=isWeighted)
-print("\n\nFinal:")
-print(g.adjacencyLists)
-print(g.adjacencyMatrix)
-
-expected = "symmetric" if not g.isDirected else "asymmetric"
-if g.adjacencyMatrix.size > 0 and g.adjacencyMatrix.equals(g.adjacencyMatrix.transpose()):
-    actual = "symmetric"
-else:
-    actual = "asymmetric"
-print(f"Expected: {expected}\nActual: {actual}")
-print("\n")
+# isMultiGraph = False
+# isDirected = False
+# isWeighted = True
+#g = Graph(seed=2, numNodes=5, numConnections=7, name="", date="", description="", weightsRange=[1,5], isMultiGraph=isMultiGraph, isDirected=isDirected, isWeighted=isWeighted)
+#print(f"\n\nSettings: isMultiGraph={isMultiGraph}, isDirected={isDirected}, isWeighted={isWeighted}")
+# print("Final:")
+# print(g.formattedAdjacencyList())
+# print(g.adjacencyMatrix)
+# g.evaluateSymmetry()
