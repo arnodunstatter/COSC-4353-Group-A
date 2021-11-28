@@ -4,15 +4,15 @@ import numpy as np
 from sys import exit  # used to end program if an invalid keyword is given to addNode
 import numpy.random as npr  # used for creating random graphs (one of the __init__ functions for Graph class)
 import datetime  # used for giving default date to graph generator as today's date
-
+from os.path import exists # used for CollectionOfGraphs.writeToTxt() to make sure the file we are writing to doesn't already exist
 
 class Graph:
     # default Attributes ------------------------------------
-    ## meta-data
+        # meta-data
     name = ""
     date = ""
     description = ""
-    ## bools
+        # bools
     isMultiGraph = False
     isDirected = False
     isWeighted = False
@@ -34,7 +34,7 @@ class Graph:
         self.adjacencyLists = {}
         self.adjacencyMatrix = pd.DataFrame()
 
-        if len(kwargs) == 1:
+        if len(kwargs) == 1 or len(kwargs) == 2:
             self.makeFromTxt(**kwargs)
         else:
             self.generateGraph(**kwargs)
@@ -43,7 +43,10 @@ class Graph:
                       isMultiGraph=False, isDirected=False, isWeighted=False):  # random graph generator
         # set attributes
         self.name = name
-        self.date = datetime.date.today()
+        if date == "":
+            self.date = datetime.date.today()
+        else:
+            self.date = date
         self.description = description
         self.isMultiGraph = isMultiGraph
         self.isDirected = isDirected
@@ -77,9 +80,12 @@ class Graph:
         self.addEdges(source, [destination, weight])
         #print(f"adding an edge between {source} and {destination} with weight {weight}","\n",self.adjacencyLists,"\n",self.adjacencyMatrix,"\n")
 
-    def makeFromTxt(self, file):  # this will read files directly
-        f = open(file)
-        self.name = f.readline()[len("GraphName: "):].split("\n")[0]
+    def makeFromTxt(self, file, f=None):  # this will read files directly
+        needToClose = False
+        if None == f:
+            f = open(file)
+            needToClose = True
+        self.name = f.readline()[len("Graph Name: "):].split("\n")[0]
         self.date = f.readline()[len("Date: "):].split("\n")[0]
         self.description = f.readline()[len("Description: "):].split("\n")[0]
         self.isMultiGraph = True if f.readline()[len("MultiGraph: "):] == "T\n" else False
@@ -88,17 +94,20 @@ class Graph:
         # the remaining lines in f should be the adjacency lists
         rows = []
         for eachRow in f:  # example of eachRow "A -> B 1 2, D 2\n"
-            if ("\n" == eachRow[
-                        len(eachRow) - 1:]):  # if the line ends in "\n", then remove it - example result: "A -> B 1 2, D 2"
+            # if the row is empty (other than the new line marker) then return to calling function - necessary to enable CollectionOfGraphs.makeFromTxt() to call this function
+            if eachRow == "\n":
+                return
+            # if the line ends in "\n", then remove it - example result: "A -> B 1 2, D 2"
+            if "\n" == eachRow[len(eachRow) - 1:]:
                 row = eachRow[:len(eachRow) - 1]
             else:
                 row = eachRow  # otherwise do just get the line as is
-            row = row.split(
-                "->")  # element 0 is source node, element 2 is destination nodes and associated weights - example result: ["A ", " B 1 2, D 2"]
+            # element 0 is source node, element 2 is destination nodes and associated weights - example result: ["A ", " B 1 2, D 2"]
+            row = row.split("->")
             row[0] = row[0].split(" ")  # isolate source node's name from the space - example result: ["A",""]
             row[1] = row[1].split(",")  # split destination nodes - example result: [" B 1 2"," D 2"]
-            for i in range(len(row[
-                                   1])):  # split destination nodes up from their weights - example of result:[["","B","1","2"],["","D","2"]]]
+            # split destination nodes up from their weights - example of result:[["","B","1","2"],["","D","2"]]]
+            for i in range(len(row[1])):
                 row[1][i] = row[1][i].split(" ")
             # row = [['A', ''], [['', 'B', '1', '2'], ['', 'D', '2']]]
             sourceNode = row[0][0]
@@ -119,6 +128,9 @@ class Graph:
                 continue
             for destination in destinationNodes:
                 self.addEdges(sourceNode, destination)
+
+        if needToClose:
+            f.close()
 
     def addSourceToAdjacencyMatrix(self, source):
         self.adjacencyMatrix.loc[source] = pd.Series(name=source, dtype=object)
@@ -280,9 +292,9 @@ class Graph:
             counter1 += 1
         return formAdjLists
 
-    def writeToTxt(self, fileName):
-        thisFile = open(fileName, "w")
-        thisFile.write("GraphName: " + self.name + "\n")
+    def writeToTxt(self, fileName, flag="w"):
+        thisFile = open(fileName, flag)
+        thisFile.write("Graph Name: " + self.name + "\n")
         thisFile.write("Date: " + str(self.date) + "\n")
         thisFile.write("Description: " + self.description + "\n")
         isMultiGraph = "T" if self.isMultiGraph else "F"
@@ -293,3 +305,81 @@ class Graph:
         thisFile.write("Weighted: " + isWeighted + "\n")
         thisFile.write(self.formattedAdjacencyList())
         thisFile.close()
+
+    def display(self):
+        print(f"Name: {self.name}")
+        print(f"Date: {self.date}")
+        print(f"Description: {self.description}")
+        print("Adjacency Lists:")
+        print(self.formattedAdjacencyList())
+        print("Adjacency Matrix:")
+        print(self.adjacencyMatrix)
+
+class CollectionOfGraphs:
+    # Attributes
+        # meta-data
+    name = ""
+    date = ""
+    description = ""
+        # data-structure
+    Graphs = []
+
+    def __init__(self, *arg):
+        self.name = ""
+        self.date = ""
+        self.description = ""
+        self.Graphs = []
+
+        if len(arg) == 1:
+            self.makeFromTxt(arg[0])
+        else:
+            self.makeFromGenerator(arg[0],arg[1],arg[2],arg[3])
+
+    def makeFromTxt(self, fileName):
+        f = open(fileName)
+        self.name = f.readline()[len("Graph Collection Name: "):].split("\n")[0]
+        self.date = f.readline()[len("Date: "):].split("\n")[0]
+        self.description = f.readline()[len("Description: "):].split("\n")[0]
+        # need to move read-stream marker forward to where the graph specifications begin
+        f.readline()
+        f.readline()
+        while True: # there's probably a better way to do this, but we're running out of time. Will fix later
+            g = Graph(file=fileName, f=f) # make the graph from the text file
+            # if we read in an empty line, our g object will be empty - that's how we detect the eof and break the while loop
+            if len(g.adjacencyLists)==0 and len(g.adjacencyMatrix.index)==0 and len(g.adjacencyMatrix.columns)==0 and g.name=="" and g.description=="":
+                break
+            self.Graphs.append(g)
+        f.close()
+
+    def makeFromGenerator(self, name, date, description, graphParams):
+        self.name = name
+        if date == "":
+            self.date = datetime.date.today()
+        else:
+            self.date = date
+        self.description = description
+        # def generateGraph(self, seed, numNodes, numConnections, name="", date="", description="", weightsRange=None, isMultiGraph=False, isDirected=False, isWeighted=False)
+        for i in range(len(graphParams)):
+            g = Graph(seed=graphParams[i][0], numNodes=graphParams[i][1], numConnections=graphParams[i][2], name=graphParams[i][3], date=graphParams[i][4], description=graphParams[i][5],
+                                    weightsRange=graphParams[i][6], isMultiGraph=graphParams[i][7], isDirected=graphParams[i][8], isWeighted=graphParams[i][9])
+            self.Graphs.append(g)
+
+    def display(self):
+        for each in self.Graphs:
+            each.display()
+            print("\n")
+
+    def writeToTxt(self, fileName):
+        f = open(fileName, "w")
+        f.write(f"Graph Collection Name: {self.name}\nDate: {self.date}\nDescription: {self.description}\n") # write our metadata
+        f.close()
+        for i in range(len(self.Graphs)):
+            f = open(fileName, "a")
+            f.write("\n\n")
+            f.close()
+            self.Graphs[i].writeToTxt(fileName, flag="a")
+            # if i != len(self.Graphs)-1: # if it's not the last graph in the collection then output two new lines for formatting
+            #     thisFile = open(fileName, "a")
+            #     thisFile.write("\n\n")
+            #     #thisFile.close()
+

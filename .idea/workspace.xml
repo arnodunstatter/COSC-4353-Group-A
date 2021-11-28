@@ -4,7 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="635011fa-1c17-4946-be7c-3f4089e12094" name="Default Changelist" comment="" />
+    <list default="true" id="635011fa-1c17-4946-be7c-3f4089e12094" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/allGraphTypesWork.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/COSC-4353-Group-A.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/COSC-4353-Group-A.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_19_2021_6_10_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_19_2021_6_10_PM__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scratch.py" beforeDir="false" afterPath="$PROJECT_DIR$/scratch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph1" beforeDir="false" afterPath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph2" beforeDir="false" afterPath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph3" beforeDir="false" afterPath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph4" beforeDir="false" afterPath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph5" beforeDir="false" afterPath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph6" beforeDir="false" afterPath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph6" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph7" beforeDir="false" afterPath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph7" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph8" beforeDir="false" afterPath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph8" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/toyCSV.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/toyInput.txt" beforeDir="false" afterPath="$PROJECT_DIR$/toyInput.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/toyInput2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/toyInput2.txt" afterDir="false" />
+    </list>
     <list id="2278c8ec-a927-4362-bb05-8a30913f8d83" name="Changes by Mia" comment="Recommitting for correct updates from previous commit" />
     <list id="ca8a3e87-dca8-400a-ab82-13e56ddb0828" name="Changes by mle4" comment="Changes by mle4" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,12 +32,27 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/scratch.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/main.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/scratch.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/classes.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IgnoredFileRootStore">
@@ -37,12 +72,12 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="codeWithMe.voiceChat.enabledByDefault" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/main.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/scratch.py" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RunManager" selected="Python.main">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python">
@@ -52,7 +87,7 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\Users\arnod\anaconda3\envs\myFirstCondaEnv\python.exe" />
+      <option name="SDK_HOME" value="C:\Users\arnod\anaconda3\envs\COSC-4353-Group-A\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -67,14 +102,14 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="scartch" type="PythonConfigurationType" factoryName="Python">
+    <configuration name="scratch" type="PythonConfigurationType" factoryName="Python">
       <module name="COSC-4353-Group-A" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\Users\arnod\anaconda3\envs\myFirstCondaEnv\python.exe" />
+      <option name="SDK_HOME" value="C:\Users\arnod\anaconda3\envs\COSC-4353-Group-A\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -90,8 +125,8 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.scartch" />
       <item itemvalue="Python.main" />
+      <item itemvalue="Python.scratch" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -108,6 +143,7 @@
       <workItem from="1637455607595" duration="16760000" />
       <workItem from="1637631911648" duration="12913000" />
       <workItem from="1637697684866" duration="9558000" />
+      <workItem from="1638062047326" duration="12129000" />
     </task>
     <task id="LOCAL-00001" summary="unversioned files preventing me form pulling">
       <created>1637367141115</created>
@@ -190,23 +226,27 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>56</line>
-          <option name="timeStamp" value="37" />
+          <url>file://$PROJECT_DIR$/classes.py</url>
+          <line>83</line>
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/classes.py</url>
+          <line>338</line>
+          <option name="timeStamp" value="46" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
-        <watch expression="self.adjacencyLists" language="Python" />
-        <watch expression="self.adjacencyMatrix" language="Python" />
-        <watch expression="formAdjLists" />
-        <watch expression="g" language="Python" />
+        <watch expression="self" language="Python" />
+        <watch expression="generatedTestCollection" language="Python" />
       </configuration>
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/COSC_4353_Group_A$main.coverage" NAME="main Coverage Results" MODIFIED="1637710125611" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/COSC_4353_Group_A$scratch.coverage" NAME="scratch Coverage Results" MODIFIED="1638071562226" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/COSC_4353_Group_A$main.coverage" NAME="main Coverage Results" MODIFIED="1638074437399" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/COSC_4353_Group_A$scartch.coverage" NAME="scartch Coverage Results" MODIFIED="1637709759046" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
