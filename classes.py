@@ -270,7 +270,20 @@ class Graph:
                                                                          weights)
 
     def deleteNode(self, node):
-        pass
+        # first remove all edges involving node
+        sources = self.adjacencyMatrix.columns
+        destinations = self.adjacencyMatrix.index
+        for source in sources:
+            self.deleteEdges(source=source, destination=node, all=True)
+        for destination in destinations:
+            self.deleteEdges(source=node, destination=destination, all=True)
+
+        #remove the node from the adjacencyLists' keys
+        self.adjacencyLists.pop(node)
+        #remove node from adjacencyMatrix's rows (sources)
+        self.adjacencyMatrix.drop(index="1", inplace=True)
+        self.adjacencyMatrix.drop(columns="1", inplace=True)
+
 
     def deleteEdges(self, source, destination, all=False, weightsToRemove=None, secondCall=False):
         # if all is True or self.isMultigraph is False then we remove all edges between source and destination
@@ -314,7 +327,6 @@ class Graph:
         if not self.isDirected:
             self.deleteEdges(source=destination, destination=source, all=all, weightsToRemove=weightsToRemove, secondCall=True)
 
-
     def evaluateSymmetry(self):
         expected = "symmetric" if not self.isDirected else "asymmetric"
         if self.adjacencyMatrix.size > 0 and self.adjacencyMatrix.equals(self.adjacencyMatrix.transpose()):
@@ -323,7 +335,6 @@ class Graph:
             actual = "asymmetric"
         print(f"Expected: {expected}\nActual: {actual}")
         print("\n")
-
 
     def formattedAdjacencyList(self):
         '''
