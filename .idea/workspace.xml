@@ -5,28 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="635011fa-1c17-4946-be7c-3f4089e12094" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/allGraphTypesWork.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/COSC-4353-Group-A.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/COSC-4353-Group-A.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_19_2021_6_10_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_19_2021_6_10_PM__Default_Changelist_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CollectionOfGraphsWorks.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scratch.py" beforeDir="false" afterPath="$PROJECT_DIR$/scratch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph1" beforeDir="false" afterPath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph2" beforeDir="false" afterPath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph3" beforeDir="false" afterPath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph4" beforeDir="false" afterPath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph5" beforeDir="false" afterPath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph5" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph6" beforeDir="false" afterPath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph6" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph7" beforeDir="false" afterPath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph7" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph8" beforeDir="false" afterPath="$PROJECT_DIR$/testingWriteToTxtFunction/Graph8" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/toyCSV.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/toyInput.txt" beforeDir="false" afterPath="$PROJECT_DIR$/toyInput.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/toyInput2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/toyInput2.txt" afterDir="false" />
     </list>
     <list id="2278c8ec-a927-4362-bb05-8a30913f8d83" name="Changes by Mia" comment="Recommitting for correct updates from previous commit" />
-    <list id="ca8a3e87-dca8-400a-ab82-13e56ddb0828" name="Changes by mle4" comment="Changes by mle4" />
+    <list id="1732d43b-4bda-4b12-a724-ba1f83840f89" name="Changes by mle4" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -51,8 +37,8 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/main.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/scratch.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/main.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/classes.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IgnoredFileRootStore">
@@ -77,7 +63,7 @@
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager" selected="Python.main">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python">
@@ -223,20 +209,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="1. Fixed __init__ so that it explicitly sets default values&#10;Question for Alipour: Why does the __init__ constructor in python not set default values by default? Each new call to our __init__ (when we had it embedded in a for-loop) still had data from previous objects created in earlier iterations of the for-loops.&#10;&#10;2. wrote writeToTxt function to output to .txt files" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/classes.py</url>
-          <line>83</line>
-          <option name="timeStamp" value="41" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/classes.py</url>
-          <line>338</line>
-          <option name="timeStamp" value="46" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="self" language="Python" />
@@ -245,8 +217,8 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/COSC_4353_Group_A$scratch.coverage" NAME="scratch Coverage Results" MODIFIED="1638071562226" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/COSC_4353_Group_A$main.coverage" NAME="main Coverage Results" MODIFIED="1638074437399" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/COSC_4353_Group_A$scratch.coverage" NAME="scratch Coverage Results" MODIFIED="1638161330636" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/COSC_4353_Group_A$main.coverage" NAME="main Coverage Results" MODIFIED="1638161642838" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/COSC_4353_Group_A$scartch.coverage" NAME="scartch Coverage Results" MODIFIED="1637709759046" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

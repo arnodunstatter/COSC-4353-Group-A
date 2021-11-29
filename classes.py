@@ -4,7 +4,25 @@ import numpy as np
 from sys import exit  # used to end program if an invalid keyword is given to addNode
 import numpy.random as npr  # used for creating random graphs (one of the __init__ functions for Graph class)
 import datetime  # used for giving default date to graph generator as today's date
-from os.path import exists # used for CollectionOfGraphs.writeToTxt() to make sure the file we are writing to doesn't already exist
+
+def sort_n_search(arrayLike, val):
+    sortedArrayLike = np.sort(arrayLike)
+    insertionIndex = np.searchsorted(sortedArrayLike, val)
+    if insertionIndex >= len(sortedArrayLike) or sortedArrayLike[insertionIndex] != val:
+        return None
+    else:
+        return insertionIndex
+
+def removeFromList(original, removables):
+    removables = removables.copy()
+    original = np.sort(original)
+    returnMe = []
+    for i in original:
+        if sort_n_search(removables, i) == None:
+            returnMe.append(i)
+        else:
+            del removables[sort_n_search(removables, i)]
+    return np.asarray(returnMe)
 
 class Graph:
     # default Attributes ------------------------------------
@@ -251,6 +269,52 @@ class Graph:
                 self.adjacencyMatrix.at[destination, source] = np.append(self.adjacencyMatrix.at[destination, source],
                                                                          weights)
 
+    def deleteNode(self, node):
+        pass
+
+    def deleteEdges(self, source, destination, all=False, weightsToRemove=None, secondCall=False):
+        # if all is True or self.isMultigraph is False then we remove all edges between source and destination
+        if all or not self.isMultiGraph:
+            # adjacencyLists
+            destinations = self.adjacencyLists.get(source)
+            newDestinations = set([])
+            for dest in destinations:
+                if dest[0] != destination:
+                    newDestinations.add(dest)
+            self.adjacencyLists.update({source:newDestinations})
+            # adjacencyMatrix
+            self.adjacencyMatrix.at[source, destination] = np.NaN
+
+        # else if weights != None then delete 1 edge from source to destination for every weight specified in weightsToRemove, having the weight specified in weightsToRemove
+        elif weightsToRemove != None:
+            # adjacencyLists
+            destinations = self.adjacencyLists.get(source)
+            newDestinations = set([])
+            for dest in destinations:
+                if dest[0] != destination:
+                    newDestinations.add(dest)
+                else:
+                    newDest = [dest[0], *list(removeFromList(dest[1:], weightsToRemove))]
+                    newDestinations.add(tuple(newDest))
+            self.adjacencyLists.update({source:newDestinations})
+
+            # adjacencyMatrix
+            newWeights = removeFromList(self.adjacencyMatrix.at[source,destination], weightsToRemove)
+            self.adjacencyMatrix.at[source,destination] = newWeights
+
+        # else if all==False and self.isMultiGraph==True and weights==None, then...
+            # print error message
+        else:
+            print("ERROR: deleteEdges() doesn't know which edges to remove. Please specify weightsToRemove as a list or array-like. If the graph is unweighted, pass as many 1's as you want removed.")
+            exit()
+
+        if secondCall: # ends recursion - dont' need a third call
+            return
+        # if it's undirected, call delete edge in the opposite order, pass down other parameters
+        if not self.isDirected:
+            self.deleteEdges(source=destination, destination=source, all=all, weightsToRemove=weightsToRemove, secondCall=True)
+
+
     def evaluateSymmetry(self):
         expected = "symmetric" if not self.isDirected else "asymmetric"
         if self.adjacencyMatrix.size > 0 and self.adjacencyMatrix.equals(self.adjacencyMatrix.transpose()):
@@ -324,6 +388,7 @@ class CollectionOfGraphs:
         # data-structure
     Graphs = []
 
+    # Methods
     def __init__(self, *arg):
         self.name = ""
         self.date = ""
@@ -347,6 +412,7 @@ class CollectionOfGraphs:
             g = Graph(file=fileName, f=f) # make the graph from the text file
             # if we read in an empty line, our g object will be empty - that's how we detect the eof and break the while loop
             if len(g.adjacencyLists)==0 and len(g.adjacencyMatrix.index)==0 and len(g.adjacencyMatrix.columns)==0 and g.name=="" and g.description=="":
+                del g
                 break
             self.Graphs.append(g)
         f.close()
