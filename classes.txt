@@ -6,7 +6,7 @@ CollectionOfGraphs
 Graph
     a string representing the name of each graph
     a string representing a description of the graph
-    a pandas data frame representing the adjancency lists of the graph
+    a dictionary of sets of tuples representing the adjancency lists of the graph
     a pandas data frame representing the adjancency matrix of the graph
     a function to add a node to the graph
     a function to remove a node from the graph
