@@ -1,28 +1,11 @@
-from numpy.core.numeric import NaN
-import pandas as pd
 import numpy as np
+import pandas as pd
 from sys import exit  # used to end program if an invalid keyword is given to addNode
 import numpy.random as npr  # used for creating random graphs (one of the __init__ functions for Graph class)
 import datetime  # used for giving default date to graph generator as today's date
+import copy
+from math import floor
 
-def sort_n_search(arrayLike, val):
-    sortedArrayLike = np.sort(arrayLike)
-    insertionIndex = np.searchsorted(sortedArrayLike, val)
-    if insertionIndex >= len(sortedArrayLike) or sortedArrayLike[insertionIndex] != val:
-        return None
-    else:
-        return insertionIndex
-
-def removeFromList(original, removables):
-    removables = removables.copy()
-    original = np.sort(original)
-    returnMe = []
-    for i in original:
-        if sort_n_search(removables, i) == None:
-            returnMe.append(i)
-        else:
-            del removables[sort_n_search(removables, i)]
-    return np.asarray(returnMe)
 
 class Graph:
     # default Attributes ------------------------------------
@@ -81,15 +64,15 @@ class Graph:
             self.helperMakeRandEdge(numNodes, source, destination, weightsRange)
 
     def helperMakeRandEdge(self, numNodes, source, destination, weightsRange):
-        if not self.isMultiGraph:  # if it's not a multigraph then destination cannot be the same as source AND source, destination pair must not be in adjacencyLists already
-            while source == destination:  # if source is the same as destination, get a new destination
-                destination = str(npr.randint(0, numNodes))
-            # we need all destinations that source goes to, but self.adjacencyLists.get() returns the set of tuples with the first value of each being each destination's name
-            if destination in set([x[0] for x in self.adjacencyLists.get(source)]):
-                # if it's a non multigraph and we already have an edge between source and destination, we need a new source and destination
+        if not self.isMultiGraph:  # if it's not a multigraph then (destination cannot be the same as source) AND (source, destination pair must not be in adjacencyLists already), while either constraint is broken, reselect source and destination
+            counter = 0
+            while source == destination or destination in set([x[0] for x in self.adjacencyLists.get(source)]):
+                if counter > 10000:
+                    print(f"Breaking an infinite while-loop in the construction of Graph: {self.name}, with source: {source}, and destination: {destination}")
+                    exit(1)
                 source = str(npr.randint(0,numNodes))
-                destination = str(npr.randint(0,numNodes))
-                self.helperMakeRandEdge(numNodes, source, destination, weightsRange)
+                destination = str(npr.randint(0, numNodes))
+                counter += 1
         if self.isWeighted:
             weight = npr.randint(weightsRange[0], weightsRange[1] + 1)
         else:
@@ -157,7 +140,7 @@ class Graph:
         self.adjacencyMatrix.insert(loc=len(self.adjacencyMatrix.columns), column=destination, value=np.NaN)
         self.adjacencyMatrix[destination] = self.adjacencyMatrix[destination].astype(object)
 
-    def addNode(self, node, nodePurpose=None):
+    def addNode(self, node, nodePurpose="source"):
         # first we add it to the adjacencyLists as a source
         if self.adjacencyLists.get(node) == None:  # if the adjacency List doesn't have the node present
             self.adjacencyLists.update({node: {}})  # then add it
@@ -193,10 +176,9 @@ class Graph:
 
     def addEdges(self, source, destList):  # doesn't matter if it's directed or not, does matter if it's weighted
         destination = destList[0]
-        if not self.isDirected and not self.isMultiGraph:  # if it's undirected and is not a multigraph and we already have source->destination then return (don't want to double-add that edge)
+        if not self.isDirected and not self.isMultiGraph:  # if it's undirected or is not a multigraph and we already have source->destination then return (don't want to double-add that edge)
             # the first condition is to prevent an exception when checking the second condition (NoneType is not iterable)
-            if None != self.adjacencyLists.get(destination) and source in set(
-                    [x[0] for x in self.adjacencyLists.get(destination)]):
+            if None != self.adjacencyLists.get(destination) and source in set([x[0] for x in self.adjacencyLists.get(destination)]):
                 return
         if self.isMultiGraph or self.isWeighted:
             weights = destList[1:]
@@ -281,9 +263,8 @@ class Graph:
         #remove the node from the adjacencyLists' keys
         self.adjacencyLists.pop(node)
         #remove node from adjacencyMatrix's rows (sources)
-        self.adjacencyMatrix.drop(index="1", inplace=True)
-        self.adjacencyMatrix.drop(columns="1", inplace=True)
-
+        self.adjacencyMatrix.drop(index=node, inplace=True)
+        self.adjacencyMatrix.drop(columns=node, inplace=True)
 
     def deleteEdges(self, source, destination, all=False, weightsToRemove=None, secondCall=False):
         # if all is True or self.isMultigraph is False then we remove all edges between source and destination
@@ -376,7 +357,7 @@ class Graph:
         thisFile.write("MultiGraph: " + isMultiGraph + "\n")
         isDirected = "T" if self.isDirected else "F"
         thisFile.write("Directed: "+isDirected + "\n")
-        isWeighted = "T" if self.isDirected else "F"
+        isWeighted = "T" if self.isWeighted else "F"
         thisFile.write("Weighted: " + isWeighted + "\n")
         thisFile.write(self.formattedAdjacencyList())
         thisFile.close()
@@ -389,6 +370,23 @@ class Graph:
         print(self.formattedAdjacencyList())
         print("Adjacency Matrix:")
         print(self.adjacencyMatrix)
+
+    def copy(self):
+        return copy.deepcopy(self)
+
+    def equals(self, graph2):
+        # this compares two graphs and returns true iff they have all the same node names and same connections between said nodes
+        # this returns false even if the two graphs are equivalent (but have different node names)
+        # furthermore, this function assumes that the adjacencyLists objects in each graph will correspond with their respective adjacencyMatrix so
+            # only the adjacencyMatrices are compared
+        #first need to sort the columns and rows of both
+
+        self.adjacencyMatrix.sort_index(axis=1, inplace=True)
+        self.adjacencyMatrix.sort_index(axis=0, inplace=True)
+        graph2.adjacencyMatrix.sort_index(axis=1, inplace=True)
+        graph2.adjacencyMatrix.sort_index(axis=0, inplace=True)
+
+        return self.adjacencyMatrix.equals(graph2.adjacencyMatrix)
 
 class CollectionOfGraphs:
     # Attributes
@@ -460,3 +458,39 @@ class CollectionOfGraphs:
             #     thisFile.write("\n\n")
             #     #thisFile.close()
 
+    def copy(self):
+        return copy.deepcopy(self)
+
+    def sort(self):
+        self.Graphs.sort(key=lambda graph: graph.name)
+
+    def equals(self, collection2):
+        # this function seeks to compare two collection of graphs. All names must be the same, as well as all node names, connections, and weights, but dates and descriptions don't matter
+        # first we'll compare their lengths, if the lengths are different, obviously they're two different collections
+        if len(self.Graphs) != len(collection2.Graphs): return False
+        # else we sort both and then compare each
+        self.sort()
+        collection2.sort()
+        # now iterate through both at once and compare each object
+        counter = 1
+
+        return True
+
+def sort_n_search(arrayLike, val):
+    sortedArrayLike = np.sort(arrayLike)
+    insertionIndex = np.searchsorted(sortedArrayLike, val)
+    if insertionIndex >= len(sortedArrayLike) or sortedArrayLike[insertionIndex] != val:
+        return None
+    else:
+        return insertionIndex
+
+def removeFromList(original, removables):
+    removables = removables.copy()
+    original = np.sort(original)
+    returnMe = []
+    for i in original:
+        if sort_n_search(removables, i) == None:
+            returnMe.append(i)
+        else:
+            del removables[sort_n_search(removables, i)]
+    return np.asarray(returnMe)

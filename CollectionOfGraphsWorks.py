@@ -1,7 +1,8 @@
 from classes import Graph
 from classes import CollectionOfGraphs
-# seed, numNodes, numConnections, name, date, description, weightsRange, isMultiGraph, isDirected, isWeighted
-graphParams = []
+
+graphParams = [] # a list of lists with each inner list having the order:
+# [seed, numNodes, numConnections, name, date, description, weightsRange, isMultiGraph, isDirected, isWeighted]
 possibleCases = [True, False]
 counter = 1
 for isMultiGraph in possibleCases:
@@ -11,7 +12,7 @@ for isMultiGraph in possibleCases:
             counter += 1
 
 generatedTestCollection = CollectionOfGraphs("testCollection1","","Our first test collection", graphParams)
-#generatedTestCollection.display()
+
 generatedTestCollection.writeToTxt("./testingWriteToTxtFunction/testCollection1.txt")
 
 readTestCollection = CollectionOfGraphs("./testingWriteToTxtFunction/testCollection1.txt")
