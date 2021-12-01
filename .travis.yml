@@ -6,4 +6,4 @@ install:
   - pip install pandas numpy
 
 script:
-  - python unitTests/runAllUnitTests.py
+  - python runAllUnitTests.py
