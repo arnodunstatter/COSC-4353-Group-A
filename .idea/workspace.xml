@@ -4,21 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="635011fa-1c17-4946-be7c-3f4089e12094" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/unitTests/runAllUnitTests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/unitTests/testAddEdges.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/unitTests/testAddNode.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/unitTests/testAll.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/unitTests/testDeleteEdges.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/unitTests/testDeleteNode.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/unitTests/testGraphObject.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CollectionOfGraphsWorks.py" beforeDir="false" afterPath="$PROJECT_DIR$/CollectionOfGraphsWorks.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Features.md" beforeDir="false" afterPath="$PROJECT_DIR$/Features.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratch.py" beforeDir="false" afterPath="$PROJECT_DIR$/scratch.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testingWriteToTxtFunction/testCollection1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testingWriteToTxtFunction/testCollection1.txt" afterDir="false" />
-    </list>
+    <list default="true" id="635011fa-1c17-4946-be7c-3f4089e12094" name="Default Changelist" comment="" />
     <list id="2278c8ec-a927-4362-bb05-8a30913f8d83" name="Changes by Mia" comment="Recommitting for correct updates from previous commit" />
     <list id="cbe3fc81-0b4b-4dab-9376-64f8019e3f95" name="Changes by mle4" comment="">
       <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
@@ -60,26 +46,6 @@
         <option value="C:\Users\arnod\OneDrive\Documents\School 2.0\Comp Sci Degree\2021 3 Fall\4353\COSC-4353-Group-A\.idea" />
       </set>
     </option>
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/classes.py">
-      <ranges>
-        <range start1="0" end1="2" start2="0" end2="0" changelist="635011fa-1c17-4946-be7c-3f4089e12094" />
-        <range start1="3" end1="3" start2="1" end2="2" changelist="635011fa-1c17-4946-be7c-3f4089e12094" />
-        <range start1="6" end1="6" start2="5" end2="7" changelist="635011fa-1c17-4946-be7c-3f4089e12094" />
-        <range start1="7" end1="25" start2="8" end2="8" changelist="635011fa-1c17-4946-be7c-3f4089e12094" />
-        <range start1="83" end1="85" start2="66" end2="73" changelist="635011fa-1c17-4946-be7c-3f4089e12094" />
-        <range start1="86" end1="92" start2="74" end2="75" changelist="635011fa-1c17-4946-be7c-3f4089e12094" />
-        <range start1="159" end1="160" start2="142" end2="143" changelist="635011fa-1c17-4946-be7c-3f4089e12094" />
-        <range start1="195" end1="196" start2="178" end2="179" changelist="635011fa-1c17-4946-be7c-3f4089e12094" />
-        <range start1="197" end1="199" start2="180" end2="181" changelist="635011fa-1c17-4946-be7c-3f4089e12094" />
-        <range start1="249" end1="251" start2="231" end2="232" changelist="30036f2c-371e-484d-9fd5-4a7dc5a73f5d" />
-        <range start1="283" end1="286" start2="264" end2="266" changelist="635011fa-1c17-4946-be7c-3f4089e12094" />
-        <range start1="378" end1="379" start2="358" end2="359" changelist="635011fa-1c17-4946-be7c-3f4089e12094" />
-        <range start1="391" end1="391" start2="371" end2="388" changelist="635011fa-1c17-4946-be7c-3f4089e12094" />
-        <range start1="462" end1="462" start2="459" end2="495" changelist="635011fa-1c17-4946-be7c-3f4089e12094" />
-      </ranges>
-    </file>
   </component>
   <component name="ProjectId" id="2176TCu4vnqCBbHb2R0FAmP0xq6" />
   <component name="ProjectViewState">
@@ -191,7 +157,7 @@
       <workItem from="1637631911648" duration="12913000" />
       <workItem from="1637697684866" duration="9558000" />
       <workItem from="1638062047326" duration="12129000" />
-      <workItem from="1638301031746" duration="32032000" />
+      <workItem from="1638301031746" duration="32316000" />
     </task>
     <task id="LOCAL-00001" summary="unversioned files preventing me form pulling">
       <created>1637367141115</created>
@@ -256,7 +222,21 @@
       <option name="project" value="LOCAL" />
       <updated>1638229646916</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="wrote all unit tests and debugged with Mark and Santos">
+      <created>1638335887301</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1638335887301</updated>
+    </task>
+    <task id="LOCAL-00011" summary="wrote all unit tests and debugged with Mark and Santos">
+      <created>1638336084495</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1638336084495</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -284,7 +264,8 @@
     <MESSAGE value="1. Fixed __init__ so that it explicitly sets default values&#10;Question for Alipour: Why does the __init__ constructor in python not set default values by default? Each new call to our __init__ (when we had it embedded in a for-loop) still had data from previous objects created in earlier iterations of the for-loops.&#10;&#10;2. wrote writeToTxt function to output to .txt files" />
     <MESSAGE value="wrote and debugged the deleteEdges function&#10;TODO: 1. Finish deleteNode function&#10;      2. Sprint 2&#10;      3. unit tests&#10;      4. write report&#10;      5. do demo video" />
     <MESSAGE value="wrote and debugged the deleteNode function&#10;TODO: 1. Sprint 2&#10;      2. unit tests / integration tests&#10;      3. write report&#10;      4. do demo video" />
-    <option name="LAST_COMMIT_MESSAGE" value="wrote and debugged the deleteNode function&#10;TODO: 1. Sprint 2&#10;      2. unit tests / integration tests&#10;      3. write report&#10;      4. do demo video" />
+    <MESSAGE value="wrote all unit tests and debugged with Mark and Santos" />
+    <option name="LAST_COMMIT_MESSAGE" value="wrote all unit tests and debugged with Mark and Santos" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
