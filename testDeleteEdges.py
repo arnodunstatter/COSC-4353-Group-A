@@ -51,3 +51,4 @@ def testDeleteEdges():
                         return
     print("True")
 
+testDeleteEdges()

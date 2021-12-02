@@ -277,9 +277,9 @@ class Graph:
         self.adjacencyMatrix.drop(columns=node, inplace=True)
 
     def deleteEdges(self, source, destination, all=False, weightsToRemove=None, secondCall=False):
-
+        #a helper function: basically set difference but with duplicate values
         def removeFromList(original, removables):
-            #sorts an arrayLike and then searches for a val, if found returns the index, otherwise returns None
+            #a helper function that sorts an arrayLike and then searches for a val, if found returns the index, otherwise returns None
             def sort_n_search(arrayLike, val):
                 sortedArrayLike = np.sort(arrayLike)
                 insertionIndex = np.searchsorted(sortedArrayLike, val)
@@ -291,11 +291,13 @@ class Graph:
             removables = removables.copy() #we don't want to alter the original object so we get a copy
             original = np.sort(original)  #sort the original list
             returnMe = [] #where we will accumulate values not in removables
-            for i in original: #for each value, i, in original, if it's not in removable
-                if sort_n_search(removables, i) == None:
-                    returnMe.append(i)
-                else:
-                    del removables[sort_n_search(removables, i)]
+
+            #for each value, i, in original, add only so many instances to returnMe as do not exist in removables - i.e. removeFromList([1,1], [1]) returns [1] - kind of like a set difference, but with duplicates
+            j = 0
+            for i in range(len(original)):
+                if sort_n_search(removables[j:], original[i]) == None:
+                    returnMe.append(original[i])
+                else: j+=1
             return np.asarray(returnMe)
 
         # if all is True or self.isMultigraph is False then we remove all edges between source and destination
