@@ -8,23 +8,24 @@ from math import floor
 
 
 class Graph:
-    # default Attributes ------------------------------------------------------------------------
-    ## meta-data
+    # Attributes ------------------------------------------------------------------------
+        ## Meta-data
     name = ""
     date = ""
     description = ""
-    ## bools
+        ## Bools
     isMultiGraph = False
     isDirected = False
     isWeighted = False
-    ## data structures
+        ## Data Structures
     adjacencyLists = {}  # a dictionary - each key's value is a set of tuples where the first value in the tuple is the destination node's name and every value after that is a weight
     adjacencyMatrix = pd.DataFrame()  # for directed graphs rows are sources, columns are destinations
 
 
+
     # Methods ------------------------------------------------------------------------
 
-    ## Initializers
+        ## Initializers
     def __init__(self, **kwargs):
         # The __init__ constructor wasn't setting the default values by default, so we added the next 8 lines to force the default values at the beginning of each constructor call
         self.name = ""
@@ -139,7 +140,7 @@ class Graph:
 
 
 
-    ## Adders
+        ## Adders
     def addSourceToAdjacencyMatrix(self, source):
         self.adjacencyMatrix.loc[source] = pd.Series(name=source, dtype=object)
 
@@ -260,7 +261,7 @@ class Graph:
 
 
 
-    ## Deleters
+        ## Deleters
     def deleteNode(self, node):
         # first remove all edges involving node
         sources = self.adjacencyMatrix.columns
@@ -343,7 +344,7 @@ class Graph:
 
 
 
-    ## Output
+        ## Output
     def formattedAdjacencyList(self):
         '''
         formats the following:
@@ -401,7 +402,7 @@ class Graph:
 
 
 
-    ## Evaluation
+        ## Evaluation
     def isSymmetric(self):
         return self.adjacencyMatrix.size > 0 and self.adjacencyMatrix.equals(self.adjacencyMatrix.transpose())
 
@@ -433,15 +434,20 @@ class Graph:
 
 
 class CollectionOfGraphs:
-    # Attributes
-        # meta-data
+    # Attributes ------------------------------------------------------------------------
+
+        ## Meta-data
     name = ""
     date = ""
     description = ""
-        # data-structure
-    Graphs = []
+        ## Data-structure
+    Graphs = [] # a list of our graph objects
 
-    # Methods
+
+
+    # Methods ------------------------------------------------------------------------
+
+        ## Initializers
     def __init__(self, *arg):
         self.name = ""
         self.date = ""
@@ -483,6 +489,12 @@ class CollectionOfGraphs:
                                     weightsRange=graphParams[i][6], isMultiGraph=graphParams[i][7], isDirected=graphParams[i][8], isWeighted=graphParams[i][9])
             self.Graphs.append(g)
 
+    def copy(self):
+        return copy.deepcopy(self)
+
+
+
+        ## Output
     def display(self):
         for each in self.Graphs:
             each.display()
@@ -502,12 +514,15 @@ class CollectionOfGraphs:
             #     thisFile.write("\n\n")
             #     #thisFile.close()
 
-    def copy(self):
-        return copy.deepcopy(self)
 
+
+        ## Ordering
     def sort(self):
         self.Graphs.sort(key=lambda graph: graph.name)
 
+
+
+        ## Evaluation
     def equals(self, collection2):
         # this function seeks to compare two collection of graphs. All names must be the same, as well as all node names, connections, and weights, but dates and descriptions don't matter
         # first we'll compare their lengths, if the lengths are different, obviously they're two different collections
