@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="635011fa-1c17-4946-be7c-3f4089e12094" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testAll.py" beforeDir="false" afterPath="$PROJECT_DIR$/testAll.py" afterDir="false" />
     </list>
     <list id="2278c8ec-a927-4362-bb05-8a30913f8d83" name="Changes by Mia" comment="Recommitting for correct updates from previous commit" />
     <list id="cbe3fc81-0b4b-4dab-9376-64f8019e3f95" name="Changes by mle4" comment="" />
@@ -63,6 +65,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\arnod\Documents\School 2.0\Comp Sci\2021.3 Fall\COSC4353 Software Design\COSC-4353-Group-A" />
       <recent name="C:\Users\arnod\Documents\School 2.0\Comp Sci\2021.3 Fall\COSC4353 Software Design\Group Project\COSC-4353-Group-A\unitTests" />
     </key>
   </component>
@@ -156,6 +159,7 @@
       <workItem from="1638062047326" duration="12129000" />
       <workItem from="1638301031746" duration="32316000" />
       <workItem from="1638431293612" duration="1349000" />
+      <workItem from="1638433832812" duration="3676000" />
     </task>
     <task id="LOCAL-00001" summary="unversioned files preventing me form pulling">
       <created>1637367141115</created>
@@ -241,7 +245,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638431499783</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="adding auxillary files">
+      <created>1638433938242</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1638433938242</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -271,7 +282,8 @@
     <MESSAGE value="wrote and debugged the deleteNode function&#10;TODO: 1. Sprint 2&#10;      2. unit tests / integration tests&#10;      3. write report&#10;      4. do demo video" />
     <MESSAGE value="wrote all unit tests and debugged with Mark and Santos" />
     <MESSAGE value="started on classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="started on classes" />
+    <MESSAGE value="adding auxillary files" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding auxillary files" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

@@ -8,22 +8,23 @@ from math import floor
 
 
 class Graph:
-    # default Attributes ------------------------------------
-        # meta-data
+    # default Attributes ------------------------------------------------------------------------
+    ## meta-data
     name = ""
     date = ""
     description = ""
-        # bools
+    ## bools
     isMultiGraph = False
     isDirected = False
     isWeighted = False
     ## data structures
     adjacencyLists = {}  # a dictionary - each key's value is a set of tuples where the first value in the tuple is the destination node's name and every value after that is a weight
-    adjacencyMatrix = pd.DataFrame()  # for directed graphs rows are sources, columns are destinations - this change was made so that accessing elements with
+    adjacencyMatrix = pd.DataFrame()  # for directed graphs rows are sources, columns are destinations
 
-    # df.loc[] (and df.at[]) will have the syntax df.loc[source,destination] instead of df.loc[destination,source]
 
-    # Methods
+    # Methods ------------------------------------------------------------------------
+
+    ## Initializers
     def __init__(self, **kwargs):
         # The __init__ constructor wasn't setting the default values by default, so we added the next 8 lines to force the default values at the beginning of each constructor call
         self.name = ""
@@ -133,6 +134,12 @@ class Graph:
         if needToClose:
             f.close()
 
+    def copy(self):
+            return copy.deepcopy(self)
+
+
+
+    ## Adders
     def addSourceToAdjacencyMatrix(self, source):
         self.adjacencyMatrix.loc[source] = pd.Series(name=source, dtype=object)
 
@@ -251,6 +258,9 @@ class Graph:
                 self.adjacencyMatrix.at[destination, source] = np.append(self.adjacencyMatrix.at[destination, source],
                                                                          weights)
 
+
+
+    ## Deleters
     def deleteNode(self, node):
         # first remove all edges involving node
         sources = self.adjacencyMatrix.columns
@@ -267,6 +277,27 @@ class Graph:
         self.adjacencyMatrix.drop(columns=node, inplace=True)
 
     def deleteEdges(self, source, destination, all=False, weightsToRemove=None, secondCall=False):
+
+        def removeFromList(original, removables):
+            #sorts an arrayLike and then searches for a val, if found returns the index, otherwise returns None
+            def sort_n_search(arrayLike, val):
+                sortedArrayLike = np.sort(arrayLike)
+                insertionIndex = np.searchsorted(sortedArrayLike, val)
+                if insertionIndex >= len(sortedArrayLike) or sortedArrayLike[insertionIndex] != val:
+                    return None
+                else:
+                    return insertionIndex
+
+            removables = removables.copy() #we don't want to alter the original object so we get a copy
+            original = np.sort(original)  #sort the original list
+            returnMe = [] #where we will accumulate values not in removables
+            for i in original: #for each value, i, in original, if it's not in removable
+                if sort_n_search(removables, i) == None:
+                    returnMe.append(i)
+                else:
+                    del removables[sort_n_search(removables, i)]
+            return np.asarray(returnMe)
+
         # if all is True or self.isMultigraph is False then we remove all edges between source and destination
         if all or not self.isMultiGraph:
             # adjacencyLists
@@ -308,15 +339,9 @@ class Graph:
         if not self.isDirected:
             self.deleteEdges(source=destination, destination=source, all=all, weightsToRemove=weightsToRemove, secondCall=True)
 
-    def evaluateSymmetry(self):
-        expected = "symmetric" if not self.isDirected else "asymmetric"
-        if self.adjacencyMatrix.size > 0 and self.adjacencyMatrix.equals(self.adjacencyMatrix.transpose()):
-            actual = "symmetric"
-        else:
-            actual = "asymmetric"
-        print(f"Expected: {expected}\nActual: {actual}")
-        print("\n")
 
+
+    ## Output
     def formattedAdjacencyList(self):
         '''
         formats the following:
@@ -348,6 +373,16 @@ class Graph:
             counter1 += 1
         return formAdjLists
 
+    def display(self):
+        print(f"Name: {self.name}")
+        print(f"Date: {self.date}")
+        print(f"Description: {self.description}")
+        print(f"Settings: isMultiGraph={self.isMultiGraph}, isDirected={self.isDirected}, isWeighted={self.isWeighted}")
+        print("Adjacency Lists:")
+        print(self.formattedAdjacencyList())
+        print("Adjacency Matrix:")
+        print(self.adjacencyMatrix)
+
     def writeToTxt(self, fileName, flag="w"):
         thisFile = open(fileName, flag)
         thisFile.write("Graph Name: " + self.name + "\n")
@@ -362,17 +397,24 @@ class Graph:
         thisFile.write(self.formattedAdjacencyList())
         thisFile.close()
 
-    def display(self):
-        print(f"Name: {self.name}")
-        print(f"Date: {self.date}")
-        print(f"Description: {self.description}")
-        print("Adjacency Lists:")
-        print(self.formattedAdjacencyList())
-        print("Adjacency Matrix:")
-        print(self.adjacencyMatrix)
 
-    def copy(self):
-        return copy.deepcopy(self)
+
+    ## Evaluation
+    def isSymmetric(self):
+        return self.adjacencyMatrix.size > 0 and self.adjacencyMatrix.equals(self.adjacencyMatrix.transpose())
+
+    def evaluateSymmetry(self):
+        #based on whether the graph is directed or not we should be able to predict if it's symmetric or not.
+        #Here we print our prediction and the reality, ex:
+        #"Expected: symmetric
+        #Actual: asymmetric"
+        expected = "symmetric" if not self.isDirected else "asymmetric"
+        if self.isSymmetric():
+            actual = "symmetric"
+        else:
+            actual = "asymmetric"
+        print(f"Expected: {expected}\nActual: {actual}")
+        print("\n")
 
     def equals(self, graph2):
         # this compares two graphs and returns true iff they have all the same node names and same connections between said nodes
@@ -380,13 +422,13 @@ class Graph:
         # furthermore, this function assumes that the adjacencyLists objects in each graph will correspond with their respective adjacencyMatrix so
             # only the adjacencyMatrices are compared
         #first need to sort the columns and rows of both
-
         self.adjacencyMatrix.sort_index(axis=1, inplace=True)
         self.adjacencyMatrix.sort_index(axis=0, inplace=True)
         graph2.adjacencyMatrix.sort_index(axis=1, inplace=True)
         graph2.adjacencyMatrix.sort_index(axis=0, inplace=True)
-
+        #now that both are sorted we compare with pd.DataFrame.equals()
         return self.adjacencyMatrix.equals(graph2.adjacencyMatrix)
+
 
 class CollectionOfGraphs:
     # Attributes
@@ -476,21 +518,7 @@ class CollectionOfGraphs:
 
         return True
 
-def sort_n_search(arrayLike, val):
-    sortedArrayLike = np.sort(arrayLike)
-    insertionIndex = np.searchsorted(sortedArrayLike, val)
-    if insertionIndex >= len(sortedArrayLike) or sortedArrayLike[insertionIndex] != val:
-        return None
-    else:
-        return insertionIndex
 
-def removeFromList(original, removables):
-    removables = removables.copy()
-    original = np.sort(original)
-    returnMe = []
-    for i in original:
-        if sort_n_search(removables, i) == None:
-            returnMe.append(i)
-        else:
-            del removables[sort_n_search(removables, i)]
-    return np.asarray(returnMe)
+
+
+
