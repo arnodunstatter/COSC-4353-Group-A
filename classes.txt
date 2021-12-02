@@ -1,7 +1,7 @@
 CollectionOfGraphs
-    a string representing the name of the csv file
+    a string representing the name of the txt file
     a string representing a description of the CollectionOfGraphs
-    a list or array of graph objects derived from the csv
+    a list or array of graph objects derived from the txt
 
 Graph
     a string representing the name of each graph
