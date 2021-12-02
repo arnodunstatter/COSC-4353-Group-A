@@ -1,8 +1,0 @@
-GraphName: BasicGraph1
-Date: 11/17/21
-Description: This is just for testing.
-MultiGraph: F
-Directed: F
-Weighted: F
-A -> B
-B -> A
