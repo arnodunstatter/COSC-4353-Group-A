@@ -9,11 +9,11 @@ from math import floor
 
 class Graph:
     # default Attributes ------------------------------------
-    # meta-data
+        # meta-data
     name = ""
     date = ""
     description = ""
-    # bools
+        # bools
     isMultiGraph = False
     isDirected = False
     isWeighted = False
@@ -229,7 +229,8 @@ class Graph:
                 self.adjacencyLists[destination].remove(found)
                 self.adjacencyLists[destination].add(updated)
 
-
+        if source == '1' and destination == '0':
+            mark = 'hey'
         # whether directed or not we add the weights to adjacencyMatrix
         # but are we initializing it or just appending to already existent weights?
         # if np.isnan(self.adjacencyMatrix.at[source,destination]): # we are initializing it
@@ -296,7 +297,7 @@ class Graph:
             self.adjacencyMatrix.at[source,destination] = newWeights
 
         # else if all==False and self.isMultiGraph==True and weights==None, then...
-        # print error message
+            # print error message
         else:
             print("ERROR: deleteEdges() doesn't know which edges to remove. Please specify weightsToRemove as a list or array-like. If the graph is unweighted, pass as many 1's as you want removed.")
             exit()
@@ -333,16 +334,16 @@ class Graph:
         for key in self.adjacencyLists:
             formAdjLists += key + " ->"
             destinations = self.adjacencyLists.get(key)
-            counter2 = 0  # used to determine if we are at the last element in the set - we don't want to add a comma if we are at the last destination for that key(source)
+            counter2 = 0 #used to determine if we are at the last element in the set - we don't want to add a comma if we are at the last destination for that key(source)
             for dest in destinations:
                 for val in dest:
                     formAdjLists += " " + str(val)
 
-                if counter2 != len(destinations) - 1:
+                if counter2 != len(destinations)-1:
                     formAdjLists += ","
 
                 counter2 += 1
-            if counter1 != len(self.adjacencyLists) - 1:
+            if counter1 != len(self.adjacencyLists)-1:
                 formAdjLists += "\n"
             counter1 += 1
         return formAdjLists
@@ -355,7 +356,7 @@ class Graph:
         isMultiGraph = "T" if self.isMultiGraph else "F"
         thisFile.write("MultiGraph: " + isMultiGraph + "\n")
         isDirected = "T" if self.isDirected else "F"
-        thisFile.write("Directed: " + isDirected + "\n")
+        thisFile.write("Directed: "+isDirected + "\n")
         isWeighted = "T" if self.isWeighted else "F"
         thisFile.write("Weighted: " + isWeighted + "\n")
         thisFile.write(self.formattedAdjacencyList())
@@ -377,8 +378,8 @@ class Graph:
         # this compares two graphs and returns true iff they have all the same node names and same connections between said nodes
         # this returns false even if the two graphs are equivalent (but have different node names)
         # furthermore, this function assumes that the adjacencyLists objects in each graph will correspond with their respective adjacencyMatrix so
-        # only the adjacencyMatrices are compared
-        # first need to sort the columns and rows of both
+            # only the adjacencyMatrices are compared
+        #first need to sort the columns and rows of both
 
         self.adjacencyMatrix.sort_index(axis=1, inplace=True)
         self.adjacencyMatrix.sort_index(axis=0, inplace=True)
@@ -386,3 +387,110 @@ class Graph:
         graph2.adjacencyMatrix.sort_index(axis=0, inplace=True)
 
         return self.adjacencyMatrix.equals(graph2.adjacencyMatrix)
+
+class CollectionOfGraphs:
+    # Attributes
+        # meta-data
+    name = ""
+    date = ""
+    description = ""
+        # data-structure
+    Graphs = []
+
+    # Methods
+    def __init__(self, *arg):
+        self.name = ""
+        self.date = ""
+        self.description = ""
+        self.Graphs = []
+
+        if len(arg) == 1:
+            self.makeFromTxt(arg[0])
+        else:
+            self.makeFromGenerator(arg[0],arg[1],arg[2],arg[3])
+
+    def makeFromTxt(self, fileName):
+        f = open(fileName)
+        self.name = f.readline()[len("Graph Collection Name: "):].split("\n")[0]
+        self.date = f.readline()[len("Date: "):].split("\n")[0]
+        self.description = f.readline()[len("Description: "):].split("\n")[0]
+        # need to move read-stream marker forward to where the graph specifications begin
+        f.readline()
+        f.readline()
+        while True: # there's probably a better way to do this, but we're running out of time. Will fix later
+            g = Graph(file=fileName, f=f) # make the graph from the text file
+            # if we read in an empty line, our g object will be empty - that's how we detect the eof and break the while loop
+            if len(g.adjacencyLists)==0 and len(g.adjacencyMatrix.index)==0 and len(g.adjacencyMatrix.columns)==0 and g.name=="" and g.description=="":
+                del g
+                break
+            self.Graphs.append(g)
+        f.close()
+
+    def makeFromGenerator(self, name, date, description, graphParams):
+        self.name = name
+        if date == "":
+            self.date = datetime.date.today()
+        else:
+            self.date = date
+        self.description = description
+        # def generateGraph(self, seed, numNodes, numConnections, name="", date="", description="", weightsRange=None, isMultiGraph=False, isDirected=False, isWeighted=False)
+        for i in range(len(graphParams)):
+            g = Graph(seed=graphParams[i][0], numNodes=graphParams[i][1], numConnections=graphParams[i][2], name=graphParams[i][3], date=graphParams[i][4], description=graphParams[i][5],
+                                    weightsRange=graphParams[i][6], isMultiGraph=graphParams[i][7], isDirected=graphParams[i][8], isWeighted=graphParams[i][9])
+            self.Graphs.append(g)
+
+    def display(self):
+        for each in self.Graphs:
+            each.display()
+            print("\n")
+
+    def writeToTxt(self, fileName):
+        f = open(fileName, "w")
+        f.write(f"Graph Collection Name: {self.name}\nDate: {self.date}\nDescription: {self.description}\n") # write our metadata
+        f.close()
+        for i in range(len(self.Graphs)):
+            f = open(fileName, "a")
+            f.write("\n\n")
+            f.close()
+            self.Graphs[i].writeToTxt(fileName, flag="a")
+            # if i != len(self.Graphs)-1: # if it's not the last graph in the collection then output two new lines for formatting
+            #     thisFile = open(fileName, "a")
+            #     thisFile.write("\n\n")
+            #     #thisFile.close()
+
+    def copy(self):
+        return copy.deepcopy(self)
+
+    def sort(self):
+        self.Graphs.sort(key=lambda graph: graph.name)
+
+    def equals(self, collection2):
+        # this function seeks to compare two collection of graphs. All names must be the same, as well as all node names, connections, and weights, but dates and descriptions don't matter
+        # first we'll compare their lengths, if the lengths are different, obviously they're two different collections
+        if len(self.Graphs) != len(collection2.Graphs): return False
+        # else we sort both and then compare each
+        self.sort()
+        collection2.sort()
+        # now iterate through both at once and compare each object
+        counter = 1
+
+        return True
+
+def sort_n_search(arrayLike, val):
+    sortedArrayLike = np.sort(arrayLike)
+    insertionIndex = np.searchsorted(sortedArrayLike, val)
+    if insertionIndex >= len(sortedArrayLike) or sortedArrayLike[insertionIndex] != val:
+        return None
+    else:
+        return insertionIndex
+
+def removeFromList(original, removables):
+    removables = removables.copy()
+    original = np.sort(original)
+    returnMe = []
+    for i in original:
+        if sort_n_search(removables, i) == None:
+            returnMe.append(i)
+        else:
+            del removables[sort_n_search(removables, i)]
+    return np.asarray(returnMe)
