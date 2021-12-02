@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="635011fa-1c17-4946-be7c-3f4089e12094" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_19_2021_6_10_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_19_2021_6_10_PM__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <list id="2278c8ec-a927-4362-bb05-8a30913f8d83" name="Changes by Mia" comment="Recommitting for correct updates from previous commit" />
     <list id="cbe3fc81-0b4b-4dab-9376-64f8019e3f95" name="Changes by mle4" comment="" />
@@ -156,7 +155,7 @@
       <workItem from="1637697684866" duration="9558000" />
       <workItem from="1638062047326" duration="12129000" />
       <workItem from="1638301031746" duration="32316000" />
-      <workItem from="1638431293612" duration="159000" />
+      <workItem from="1638431293612" duration="1349000" />
     </task>
     <task id="LOCAL-00001" summary="unversioned files preventing me form pulling">
       <created>1637367141115</created>
@@ -235,7 +234,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638336084495</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="started on classes">
+      <created>1638431499783</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1638431499783</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -264,7 +270,8 @@
     <MESSAGE value="wrote and debugged the deleteEdges function&#10;TODO: 1. Finish deleteNode function&#10;      2. Sprint 2&#10;      3. unit tests&#10;      4. write report&#10;      5. do demo video" />
     <MESSAGE value="wrote and debugged the deleteNode function&#10;TODO: 1. Sprint 2&#10;      2. unit tests / integration tests&#10;      3. write report&#10;      4. do demo video" />
     <MESSAGE value="wrote all unit tests and debugged with Mark and Santos" />
-    <option name="LAST_COMMIT_MESSAGE" value="wrote all unit tests and debugged with Mark and Santos" />
+    <MESSAGE value="started on classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="started on classes" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
