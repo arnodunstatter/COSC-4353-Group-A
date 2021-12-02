@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="635011fa-1c17-4946-be7c-3f4089e12094" name="Default Changelist" comment="" />
-    <list id="2278c8ec-a927-4362-bb05-8a30913f8d83" name="Changes by Mia" comment="Recommitting for correct updates from previous commit" />
-    <list id="cbe3fc81-0b4b-4dab-9376-64f8019e3f95" name="Changes by mle4" comment="">
-      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
-    </list>
-    <list id="30036f2c-371e-484d-9fd5-4a7dc5a73f5d" name="Changes by Santos Garcia" comment="">
+    <list default="true" id="635011fa-1c17-4946-be7c-3f4089e12094" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_19_2021_6_10_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_19_2021_6_10_PM__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes.py" afterDir="false" />
     </list>
+    <list id="2278c8ec-a927-4362-bb05-8a30913f8d83" name="Changes by Mia" comment="Recommitting for correct updates from previous commit" />
+    <list id="cbe3fc81-0b4b-4dab-9376-64f8019e3f95" name="Changes by mle4" comment="" />
+    <list id="30036f2c-371e-484d-9fd5-4a7dc5a73f5d" name="Changes by Santos Garcia" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,7 +35,6 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/scratch.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/main.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/classes.py" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -158,6 +156,7 @@
       <workItem from="1637697684866" duration="9558000" />
       <workItem from="1638062047326" duration="12129000" />
       <workItem from="1638301031746" duration="32316000" />
+      <workItem from="1638431293612" duration="159000" />
     </task>
     <task id="LOCAL-00001" summary="unversioned files preventing me form pulling">
       <created>1637367141115</created>
