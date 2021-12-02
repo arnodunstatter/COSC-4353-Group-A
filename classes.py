@@ -306,3 +306,83 @@ class Graph:
         # if it's undirected, call delete edge in the opposite order, pass down other parameters
         if not self.isDirected:
             self.deleteEdges(source=destination, destination=source, all=all, weightsToRemove=weightsToRemove, secondCall=True)
+
+    def evaluateSymmetry(self):
+        expected = "symmetric" if not self.isDirected else "asymmetric"
+        if self.adjacencyMatrix.size > 0 and self.adjacencyMatrix.equals(self.adjacencyMatrix.transpose()):
+            actual = "symmetric"
+        else:
+            actual = "asymmetric"
+        print(f"Expected: {expected}\nActual: {actual}")
+        print("\n")
+
+    def formattedAdjacencyList(self):
+        '''
+        formats the following:
+        {"a":{("b", 1, 2),("c", 1)},
+        "b":{("a", 1, 2)},
+        "c":{("a", 1)}}
+        to a string like this:
+        "a -> b 1 2, c 1
+        b -> a 1 2
+        c -> a 1"
+        and returns it
+        '''
+        formAdjLists = ""
+        counter1 = 0
+        for key in self.adjacencyLists:
+            formAdjLists += key + " ->"
+            destinations = self.adjacencyLists.get(key)
+            counter2 = 0  # used to determine if we are at the last element in the set - we don't want to add a comma if we are at the last destination for that key(source)
+            for dest in destinations:
+                for val in dest:
+                    formAdjLists += " " + str(val)
+
+                if counter2 != len(destinations) - 1:
+                    formAdjLists += ","
+
+                counter2 += 1
+            if counter1 != len(self.adjacencyLists) - 1:
+                formAdjLists += "\n"
+            counter1 += 1
+        return formAdjLists
+
+    def writeToTxt(self, fileName, flag="w"):
+        thisFile = open(fileName, flag)
+        thisFile.write("Graph Name: " + self.name + "\n")
+        thisFile.write("Date: " + str(self.date) + "\n")
+        thisFile.write("Description: " + self.description + "\n")
+        isMultiGraph = "T" if self.isMultiGraph else "F"
+        thisFile.write("MultiGraph: " + isMultiGraph + "\n")
+        isDirected = "T" if self.isDirected else "F"
+        thisFile.write("Directed: " + isDirected + "\n")
+        isWeighted = "T" if self.isWeighted else "F"
+        thisFile.write("Weighted: " + isWeighted + "\n")
+        thisFile.write(self.formattedAdjacencyList())
+        thisFile.close()
+
+    def display(self):
+        print(f"Name: {self.name}")
+        print(f"Date: {self.date}")
+        print(f"Description: {self.description}")
+        print("Adjacency Lists:")
+        print(self.formattedAdjacencyList())
+        print("Adjacency Matrix:")
+        print(self.adjacencyMatrix)
+
+    def copy(self):
+        return copy.deepcopy(self)
+
+    def equals(self, graph2):
+        # this compares two graphs and returns true iff they have all the same node names and same connections between said nodes
+        # this returns false even if the two graphs are equivalent (but have different node names)
+        # furthermore, this function assumes that the adjacencyLists objects in each graph will correspond with their respective adjacencyMatrix so
+        # only the adjacencyMatrices are compared
+        # first need to sort the columns and rows of both
+
+        self.adjacencyMatrix.sort_index(axis=1, inplace=True)
+        self.adjacencyMatrix.sort_index(axis=0, inplace=True)
+        graph2.adjacencyMatrix.sort_index(axis=1, inplace=True)
+        graph2.adjacencyMatrix.sort_index(axis=0, inplace=True)
+
+        return self.adjacencyMatrix.equals(graph2.adjacencyMatrix)
