@@ -140,7 +140,6 @@ class Graph:
 
 
 
-
     ## Adders
     def addSourceToAdjacencyMatrix(self, source):
         self.adjacencyMatrix.loc[source] = pd.Series(name=source, dtype=object)
