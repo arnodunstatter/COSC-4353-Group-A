@@ -3,8 +3,8 @@ import pandas as pd
 from sys import exit  # used to end program if an invalid keyword is given to addNode
 import numpy.random as npr  # used for creating random graphs (one of the __init__ functions for Graph class)
 import datetime  # used for giving default date to graph generator as today's date
-import copy
-from math import floor
+import copy # used for our 'copy constructors'
+from math import floor # used for generating numberOfConnections when making parameters for a graph generator
 
 
 class Graph:
@@ -25,7 +25,7 @@ class Graph:
 
     # Methods ------------------------------------------------------------------------
 
-    ## Initializers
+    ## Constructors
     def __init__(self, **kwargs):
         # The __init__ constructor wasn't setting the default values by default, so we added the next 8 lines to force the default values at the beginning of each constructor call
         self.name = ""
@@ -44,6 +44,24 @@ class Graph:
 
     def generateGraph(self, seed, numNodes, numConnections, name="", date="", description="", weightsRange=None,
                       isMultiGraph=False, isDirected=False, isWeighted=False):  # random graph generator
+        def helperMakeRandEdge(numNodes, source, destination, weightsRange):
+            if not self.isMultiGraph:  # if it's not a multigraph then (destination cannot be the same as source) AND (source, destination pair must not be in adjacencyLists already), while either constraint is broken, reselect source and destination
+                counter = 0
+                while source == destination or destination in set([x[0] for x in self.adjacencyLists.get(source)]):
+                    if counter > 10000:
+                        print(f"Breaking an infinite while-loop in the construction of Graph: {self.name}, with source: {source}, and destination: {destination}")
+                        exit(1)
+                    source = str(npr.randint(0,numNodes))
+                    destination = str(npr.randint(0, numNodes))
+                    counter += 1
+            if self.isWeighted:
+                weight = npr.randint(weightsRange[0], weightsRange[1] + 1)
+            else:
+                weight = 1
+
+            self.addEdges(source, [destination, weight])
+            #print(f"adding an edge between {source} and {destination} with weight {weight}","\n",self.adjacencyLists,"\n",self.adjacencyMatrix,"\n")
+
         # set attributes
         self.name = name
         if date == "":
@@ -63,25 +81,7 @@ class Graph:
         for edge in range(numConnections):
             source = str(npr.randint(0, numNodes))
             destination = str(npr.randint(0, numNodes))
-            self.helperMakeRandEdge(numNodes, source, destination, weightsRange)
-
-    def helperMakeRandEdge(self, numNodes, source, destination, weightsRange):
-        if not self.isMultiGraph:  # if it's not a multigraph then (destination cannot be the same as source) AND (source, destination pair must not be in adjacencyLists already), while either constraint is broken, reselect source and destination
-            counter = 0
-            while source == destination or destination in set([x[0] for x in self.adjacencyLists.get(source)]):
-                if counter > 10000:
-                    print(f"Breaking an infinite while-loop in the construction of Graph: {self.name}, with source: {source}, and destination: {destination}")
-                    exit(1)
-                source = str(npr.randint(0,numNodes))
-                destination = str(npr.randint(0, numNodes))
-                counter += 1
-        if self.isWeighted:
-            weight = npr.randint(weightsRange[0], weightsRange[1] + 1)
-        else:
-            weight = 1
-
-        self.addEdges(source, [destination, weight])
-        #print(f"adding an edge between {source} and {destination} with weight {weight}","\n",self.adjacencyLists,"\n",self.adjacencyMatrix,"\n")
+            helperMakeRandEdge(numNodes, source, destination, weightsRange)
 
     def makeFromTxt(self, file, f=None):  # this will read files directly
         needToClose = False
@@ -137,6 +137,7 @@ class Graph:
 
     def copy(self):
             return copy.deepcopy(self)
+
 
 
 
@@ -435,7 +436,6 @@ class Graph:
 
 class CollectionOfGraphs:
     # Attributes ------------------------------------------------------------------------
-
     ## Meta-data
     name = ""
     date = ""
@@ -447,7 +447,7 @@ class CollectionOfGraphs:
 
     # Methods ------------------------------------------------------------------------
 
-    ## Initializers
+    ## Constructors
     def __init__(self, *arg):
         self.name = ""
         self.date = ""
@@ -531,7 +531,9 @@ class CollectionOfGraphs:
         self.sort()
         collection2.sort()
         # now iterate through both at once and compare each object
-        counter = 1
+        for i,j in zip(self.Graphs, collection2.Graphs):
+            if not i.equals(j):
+                return False
 
         return True
 

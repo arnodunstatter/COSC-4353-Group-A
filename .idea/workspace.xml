@@ -6,10 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="635011fa-1c17-4946-be7c-3f4089e12094" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/runAllUnitTests.py" beforeDir="false" afterPath="$PROJECT_DIR$/runAllUnitTests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testCollection1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testCollection1.txt" afterDir="false" />
     </list>
     <list id="2278c8ec-a927-4362-bb05-8a30913f8d83" name="Changes by Mia" comment="Recommitting for correct updates from previous commit" />
-    <list id="cbe3fc81-0b4b-4dab-9376-64f8019e3f95" name="Changes by mle4" comment="" />
+    <list id="cbe3fc81-0b4b-4dab-9376-64f8019e3f95" name="Changes by mle4" comment="">
+      <change beforePath="$PROJECT_DIR$/classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes.py" afterDir="false" />
+    </list>
     <list id="30036f2c-371e-484d-9fd5-4a7dc5a73f5d" name="Changes by Santos Garcia" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +48,21 @@
         <option value="C:\Users\arnod\OneDrive\Documents\School 2.0\Comp Sci Degree\2021 3 Fall\4353\COSC-4353-Group-A\.idea" />
       </set>
     </option>
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/classes.py">
+      <ranges>
+        <range start1="5" end1="7" start2="5" end2="7" changelist="635011fa-1c17-4946-be7c-3f4089e12094" />
+        <range start1="27" end1="28" start2="27" end2="28" changelist="635011fa-1c17-4946-be7c-3f4089e12094" />
+        <range start1="46" end1="46" start2="46" end2="64" changelist="635011fa-1c17-4946-be7c-3f4089e12094" />
+        <range start1="65" end1="84" start2="83" end2="84" changelist="635011fa-1c17-4946-be7c-3f4089e12094" />
+        <range start1="139" end1="140" start2="139" end2="139" changelist="cbe3fc81-0b4b-4dab-9376-64f8019e3f95" />
+        <range start1="141" end1="141" start2="140" end2="141" changelist="635011fa-1c17-4946-be7c-3f4089e12094" />
+        <range start1="437" end1="438" start2="437" end2="437" changelist="635011fa-1c17-4946-be7c-3f4089e12094" />
+        <range start1="449" end1="450" start2="448" end2="449" changelist="635011fa-1c17-4946-be7c-3f4089e12094" />
+        <range start1="533" end1="534" start2="532" end2="535" changelist="635011fa-1c17-4946-be7c-3f4089e12094" />
+      </ranges>
+    </file>
   </component>
   <component name="ProjectId" id="2176TCu4vnqCBbHb2R0FAmP0xq6" />
   <component name="ProjectViewState">
@@ -158,7 +177,7 @@
       <workItem from="1638062047326" duration="12129000" />
       <workItem from="1638301031746" duration="32316000" />
       <workItem from="1638431293612" duration="1349000" />
-      <workItem from="1638433832812" duration="10165000" />
+      <workItem from="1638433832812" duration="17289000" />
     </task>
     <task id="LOCAL-00001" summary="unversioned files preventing me form pulling">
       <created>1637367141115</created>
@@ -286,7 +305,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638473618811</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="removed function call from deleteEdges.py file">
+      <created>1638474027650</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1638474027650</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -321,18 +347,10 @@
     <MESSAGE value="refactoring in prep for video 2" />
     <MESSAGE value="refactoring in prep for video 3" />
     <MESSAGE value="refactoring in prep for video 4" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactoring in prep for video 4" />
+    <MESSAGE value="removed function call from deleteEdges.py file" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed function call from deleteEdges.py file" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/testDeleteEdges.py</url>
-          <line>53</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="self" language="Python" />
@@ -342,7 +360,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/COSC_4353_Group_A$scratch.coverage" NAME="scratch Coverage Results" MODIFIED="1638441126159" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/COSC_4353_Group_A$testing.coverage" NAME="testing Coverage Results" MODIFIED="1638473909175" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/COSC_4353_Group_A$testing.coverage" NAME="testing Coverage Results" MODIFIED="1638481207694" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/COSC_4353_Group_A$main.coverage" NAME="main Coverage Results" MODIFIED="1638306575071" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/COSC_4353_Group_A$scartch.coverage" NAME="scartch Coverage Results" MODIFIED="1637709759046" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>

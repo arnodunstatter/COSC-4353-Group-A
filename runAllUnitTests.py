@@ -1,9 +1,9 @@
-from testAddEdges import testAddEdges
 from testAddNode import testAddNode
-from testAll import testAll
-from testDeleteEdges import testDeleteEdges
 from testDeleteNode import testDeleteNode
+from testAddEdges import testAddEdges
+from testDeleteEdges import testDeleteEdges
 from testGraphObject import testGraphObject
+from testAll import testAll
 
 
 print(f"testAddNode() is working:")
