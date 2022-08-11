@@ -18,7 +18,7 @@ class Graph:
     isDirected = False
     isWeighted = False
     ## Data Structures
-    adjacencyLists = {}  # a dictionary - each key's value is a set of tuples where the first value in the tuple is the destination node's name and every value after that is a weight
+    adjacencyLists = {}  # a dictionary - each key's value is a set of tuples where the first value in each tuple is the destination node's name and every value after that is a weight
     adjacencyMatrix = pd.DataFrame()  # for directed graphs rows are sources, columns are destinations
 
 
@@ -48,7 +48,7 @@ class Graph:
             if not self.isMultiGraph:  # if it's not a multigraph then (destination cannot be the same as source) AND (source, destination pair must not be in adjacencyLists already), while either constraint is broken, reselect source and destination
                 counter = 0
                 while source == destination or destination in set([x[0] for x in self.adjacencyLists.get(source)]):
-                    if counter > 10000:
+                    if counter > 10000: # debugging code to alert programmer to an infinite loop
                         print(f"Breaking an infinite while-loop in the construction of Graph: {self.name}, with source: {source}, and destination: {destination}")
                         exit(1)
                     source = str(npr.randint(0,numNodes))
@@ -60,7 +60,6 @@ class Graph:
                 weight = 1
 
             self.addEdges(source, [destination, weight])
-            #print(f"adding an edge between {source} and {destination} with weight {weight}","\n",self.adjacencyLists,"\n",self.adjacencyMatrix,"\n")
 
         # set attributes
         self.name = name
@@ -262,47 +261,34 @@ class Graph:
 
 
     ## Deleters
-    def deleteNode(self, node):
+    def deleteNode(self, nodeToDelete):
         # first remove all edges involving node
         sources = self.adjacencyMatrix.columns
         destinations = self.adjacencyMatrix.index
         for source in sources:
-            self.deleteEdges(source=source, destination=node, all=True)
+            self.deleteEdges(source=source, destination=nodeToDelete, removeAllWeights=True)
         for destination in destinations:
-            self.deleteEdges(source=node, destination=destination, all=True)
+            self.deleteEdges(source=nodeToDelete, destination=destination, removeAllWeights=True)
 
         #remove the node from the adjacencyLists' keys
-        self.adjacencyLists.pop(node)
+        self.adjacencyLists.pop(nodeToDelete)
         #remove node from adjacencyMatrix's rows (sources)
-        self.adjacencyMatrix.drop(index=node, inplace=True)
-        self.adjacencyMatrix.drop(columns=node, inplace=True)
+        self.adjacencyMatrix.drop(index=nodeToDelete, inplace=True)
+        self.adjacencyMatrix.drop(columns=nodeToDelete, inplace=True)
 
-    def deleteEdges(self, source, destination, all=False, weightsToRemove=None, secondCall=False):
-        #a helper function: basically set difference but with duplicate values
+    def deleteEdges(self, source, destination, removeAllWeights=False, weightsToRemove=None, secondCall=False):
         def removeFromList(original, removables):
-            #a helper function that sorts an arrayLike and then searches for a val, if found returns the index, otherwise returns None
-            def sort_n_search(arrayLike, val):
-                sortedArrayLike = np.sort(arrayLike)
-                insertionIndex = np.searchsorted(sortedArrayLike, val)
-                if insertionIndex >= len(sortedArrayLike) or sortedArrayLike[insertionIndex] != val:
-                    return None
-                else:
-                    return insertionIndex
-
-            removables = removables.copy() #we don't want to alter the original object so we get a copy
-            original = np.sort(original)  #sort the original list
-            returnMe = [] #where we will accumulate values not in removables
-
-            #for each value, i, in original, add only so many instances to returnMe as do not exist in removables - i.e. removeFromList([1,1], [1]) returns [1] - kind of like a set difference, but with duplicates
-            j = 0
-            for i in range(len(original)):
-                if sort_n_search(removables[j:], original[i]) == None:
-                    returnMe.append(original[i])
-                else: j+=1
-            return np.asarray(returnMe)
+            # a helper function which essentially removes all the removables from original and returns the result
+            original = list(copy.deepcopy(original)) # we don't want to alter the actual original object so we get a copy
+            for valToRemove in removables:
+                for i,weight in enumerate(original):
+                    if weight == valToRemove:
+                        original[i] = None
+                        break
+            return np.asarray([i for i in original if i != None])
 
         # if all is True or self.isMultigraph is False then we remove all edges between source and destination
-        if all or not self.isMultiGraph:
+        if removeAllWeights or not self.isMultiGraph:
             # adjacencyLists
             destinations = self.adjacencyLists.get(source)
             newDestinations = set([])
@@ -313,9 +299,9 @@ class Graph:
             # adjacencyMatrix
             self.adjacencyMatrix.at[source, destination] = np.NaN
 
-        # else if weights != None then delete 1 edge from source to destination for every weight specified in weightsToRemove, having the weight specified in weightsToRemove
+        # else if weightsToRemove != None then delete 1 edge from source to destination for every weight specified in weightsToRemove, having the weight specified in weightsToRemove
         elif weightsToRemove != None:
-            # adjacencyLists
+            # edit adjacencyLists
             destinations = self.adjacencyLists.get(source)
             newDestinations = set([])
             for dest in destinations:
@@ -326,7 +312,7 @@ class Graph:
                     newDestinations.add(tuple(newDest))
             self.adjacencyLists.update({source:newDestinations})
 
-            # adjacencyMatrix
+            # edit adjacencyMatrix
             newWeights = removeFromList(self.adjacencyMatrix.at[source,destination], weightsToRemove)
             self.adjacencyMatrix.at[source,destination] = newWeights
 
@@ -340,7 +326,7 @@ class Graph:
             return
         # if it's undirected, call delete edge in the opposite order, pass down other parameters
         if not self.isDirected:
-            self.deleteEdges(source=destination, destination=source, all=all, weightsToRemove=weightsToRemove, secondCall=True)
+            self.deleteEdges(source=destination, destination=source, removeAllWeights=removeAllWeights, weightsToRemove=weightsToRemove, secondCall=True)
 
 
 
@@ -484,8 +470,9 @@ class CollectionOfGraphs:
         self.description = description
         # def generateGraph(self, seed, numNodes, numConnections, name="", date="", description="", weightsRange=None, isMultiGraph=False, isDirected=False, isWeighted=False)
         for i in range(len(graphParams)):
-            g = Graph(seed=graphParams[i][0], numNodes=graphParams[i][1], numConnections=graphParams[i][2], name=graphParams[i][3], date=graphParams[i][4], description=graphParams[i][5],
-                                    weightsRange=graphParams[i][6], isMultiGraph=graphParams[i][7], isDirected=graphParams[i][8], isWeighted=graphParams[i][9])
+            g = Graph(seed=graphParams[i][0], numNodes=graphParams[i][1], numConnections=graphParams[i][2], name=graphParams[i][3], date=graphParams[i][4], 
+                        description=graphParams[i][5], weightsRange=graphParams[i][6], isMultiGraph=graphParams[i][7], isDirected=graphParams[i][8], 
+                        isWeighted=graphParams[i][9])
             self.Graphs.append(g)
 
     def copy(self):

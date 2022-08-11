@@ -1,5 +1,5 @@
 from classes import *
-def testAll():
+def testAllGraphTypes():
     #All Features are implicitly tested together by this last test.
     #Generate Graphs, add to a CollectionOfGraphs, write the collection to a file, read it in from the file, compare read in collection to original collection, if they're equal, print 'True' otherwise print 'False':
     # Read a file representing multiple graphs

@@ -3,7 +3,7 @@ from testDeleteNode import testDeleteNode
 from testAddEdges import testAddEdges
 from testDeleteEdges import testDeleteEdges
 from testGraphObject import testGraphObject
-from testAll import testAll
+from testAllGraphTypes import testAllGraphTypes
 
 
 print(f"testAddNode() is working:")
@@ -16,5 +16,5 @@ print(f"\ntestDeleteEdges() is working:")
 testDeleteEdges()
 print(f"\ntestGraphObject() is working:")
 testGraphObject()
-print(f"\ntestAll() is working:")
-testAll()
+print(f"\ntestAllGraphTypes() is working:")
+testAllGraphTypes()
